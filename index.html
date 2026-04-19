@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Prague AI Workshop — Internal Sync</title>
-<meta name="description" content="Internal planning site for the AI at the Bedside workshop at the Prague Autoimmunity Congress.">
+<title>AI at the Bedside · Prague Autoimmunity Congress Workshop</title>
+<meta name="description" content="AI at the Bedside: Clinical Reasoning in the Age of AI Chatbots — a 2-hour workshop for clinicians at the Prague Autoimmunity Congress. Four speakers, three cases, one AI vs. no-AI exercise.">
 <meta name="robots" content="noindex,nofollow">
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
@@ -201,9 +201,8 @@
     .split-seg { font-size: 0.6rem; }
     .split-seg::after { padding: 0 0.15rem; }
     /* tiny segments on mobile: blank; rely on the schedule rows below */
-    .split-seg[style*="--seg:2"]::after,
-    .split-seg[style*="--seg:5"]::after,
-    .split-seg[style*="--seg:8"]::after { content: ''; }
+    .split-seg[style*="--seg:2;"]::after,
+    .split-seg[style*="--seg:8;"]::after { content: ''; }
     .split-ruler { font-size: 0.6rem; }
   }
 
@@ -595,7 +594,7 @@
 <!-- Nav -->
 <nav class="nav">
   <div class="nav-inner">
-    <div class="nav-brand">Prague AI Workshop · Team Sync</div>
+    <div class="nav-brand">AI at the Bedside · Prague 2026</div>
     <div class="nav-links">
       <a href="javascript:void(0)" onclick="switchTab('home', this)" class="active">① Overview</a>
       <a href="javascript:void(0)" onclick="switchTab('speakers', this)">② Speakers</a>
@@ -613,7 +612,7 @@
 <!-- ============================= -->
 <section class="section hero active" id="home">
   <div class="section-inner">
-    <div class="hero-badge">Internal Sync · Prague Autoimmunity Congress</div>
+    <div class="hero-badge">Prague Autoimmunity Congress · Workshop</div>
     <h1>AI at the Bedside:<br><em>Clinical Reasoning</em> in the Age of AI Chatbots</h1>
     <p class="hero-sub">A 2-hour interactive workshop for ~80 clinicians. Four speakers — one cyber/AI technologist and three clinicians — teaching how to use AI tools effectively at the point of care, and when not to trust them. <a href="javascript:void(0)" onclick="switchTab('glossary', document.querySelector('.nav-links a:nth-child(7)'))" style="color:var(--accent);text-decoration:underline dotted;text-underline-offset:3px;">Quick glossary →</a></p>
 
@@ -633,14 +632,13 @@
       </div>
 
       <div class="split-bar">
-        <div class="split-seg" style="--seg:5;--c:var(--text-muted);"    data-label="Welcome" data-min="5"></div>
         <div class="split-seg" style="--seg:20;--c:var(--accent);"       data-label="Yoad" data-min="20"></div>
-        <div class="split-seg" style="--seg:15;--c:var(--accent-4);"     data-label="Or" data-min="15"></div>
-        <div class="split-seg" style="--seg:15;--c:var(--accent-3);"     data-label="Daphna" data-min="15"></div>
+        <div class="split-seg" style="--seg:22;--c:var(--accent-4);"     data-label="Or" data-min="22"></div>
+        <div class="split-seg" style="--seg:22;--c:var(--accent-3);"     data-label="Daphna" data-min="22"></div>
         <div class="split-seg" style="--seg:10;--c:var(--text-dim);"     data-label="Break" data-min="10"></div>
         <div class="split-seg" style="--seg:15;--c:var(--accent-2);"     data-label="Itamar" data-min="15"></div>
-        <div class="split-seg" style="--seg:30;--c:var(--accent-3);"     data-label="AI vs no-AI" data-min="30"></div>
-        <div class="split-seg" style="--seg:8;--c:var(--accent-4);"      data-label="Debrief" data-min="8"></div>
+        <div class="split-seg" style="--seg:22;--c:var(--accent-3);"     data-label="AI vs no-AI" data-min="22"></div>
+        <div class="split-seg" style="--seg:7;--c:var(--accent-4);"      data-label="Debrief" data-min="7"></div>
         <div class="split-seg" style="--seg:2;--c:var(--accent);"        data-label="Close" data-min="2"></div>
       </div>
 
@@ -653,23 +651,22 @@
       </div>
 
       <div class="split-rows">
-        <div class="split-row"><span class="sr-time">0:00–0:05</span><span class="sr-owner" style="color:var(--text-muted);">All</span><span class="sr-seg">Welcome + live pre-survey</span><span class="sr-min">5m</span></div>
-        <div class="split-row lead"><span class="sr-time">0:05–0:25</span><span class="sr-owner" style="color:var(--accent);"><img class="sr-avatar" src="images/yoad.jpg" alt="Yoad" onerror="this.outerHTML='&lt;span class=sr-avatar-fallback&gt;Y&lt;/span&gt;'">Yoad</span><span class="sr-seg">🧠 AI foundations — how LLMs work, prompting, live hallucination demo</span><span class="sr-min">20m</span></div>
-        <div class="split-row lead"><span class="sr-time">0:25–0:40</span><span class="sr-owner" style="color:var(--accent-4);"><img class="sr-avatar" src="images/or.jpg" alt="Or" onerror="this.outerHTML='&lt;span class=sr-avatar-fallback&gt;O&lt;/span&gt;'">Or</span><span class="sr-seg">🩺 Clinical reasoning + cognitive bias in diagnosis</span><span class="sr-min">15m</span></div>
-        <div class="split-row lead"><span class="sr-time">0:40–0:55</span><span class="sr-owner" style="color:var(--accent-3);"><img class="sr-avatar" src="images/daphna.jpg" alt="Daphna" onerror="this.outerHTML='&lt;span class=sr-avatar-fallback&gt;D&lt;/span&gt;'">Daphna</span><span class="sr-seg">🔬 Patient-facing AI + Medint model + pediatric ED lens</span><span class="sr-min">15m</span></div>
-        <div class="split-row"><span class="sr-time">0:55–1:05</span><span class="sr-owner" style="color:var(--text-dim);">—</span><span class="sr-seg">☕ Break</span><span class="sr-min">10m</span></div>
-        <div class="split-row lead"><span class="sr-time">1:05–1:20</span><span class="sr-owner" style="color:var(--accent-2);"><img class="sr-avatar" src="images/itamar.jpg" alt="Itamar" onerror="this.outerHTML='&lt;span class=sr-avatar-fallback&gt;I&lt;/span&gt;'">Itamar</span><span class="sr-seg">📊 AI at hospital scale — data, governance, Soroka reality check</span><span class="sr-min">15m</span></div>
-        <div class="split-row"><span class="sr-time">1:20–1:50</span><span class="sr-owner" style="color:var(--text);"><span class="sr-avatar-stack"><img class="sr-avatar" src="images/yoad.jpg" alt="Yoad"><img class="sr-avatar" src="images/or.jpg" alt="Or"><img class="sr-avatar" src="images/daphna.jpg" alt="Daphna"><img class="sr-avatar" src="images/itamar.jpg" alt="Itamar"></span>All float</span><span class="sr-seg">🎯 Case Challenge — AI vs. no-AI, then swap</span><span class="sr-min">30m</span></div>
-        <div class="split-row"><span class="sr-time">1:50–1:58</span><span class="sr-owner" style="color:var(--text);"><span class="sr-avatar-stack"><img class="sr-avatar" src="images/or.jpg" alt="Or"><img class="sr-avatar" src="images/daphna.jpg" alt="Daphna"><img class="sr-avatar" src="images/itamar.jpg" alt="Itamar"></span>Or · Daphna · Itamar</span><span class="sr-seg">🔍 Live debrief — compare outcomes, three clinical lenses</span><span class="sr-min">8m</span></div>
-        <div class="split-row lead"><span class="sr-time">1:58–2:00</span><span class="sr-owner" style="color:var(--accent);"><img class="sr-avatar" src="images/yoad.jpg" alt="Yoad" onerror="this.outerHTML='&lt;span class=sr-avatar-fallback&gt;Y&lt;/span&gt;'">Yoad</span><span class="sr-seg">🎤 Close — post-survey delta + "copilot-to-agent" vision</span><span class="sr-min">2m</span></div>
+        <div class="split-row lead"><span class="sr-time">0:00–0:20</span><span class="sr-owner" style="color:var(--accent);"><img class="sr-avatar" src="images/yoad.jpg" alt="Yoad" onerror="this.outerHTML='&lt;span class=sr-avatar-fallback&gt;Y&lt;/span&gt;'">Yoad</span><span class="sr-seg">🎙️ Workshop intro + objectives · 🧠 AI foundations — how LLMs work, prompting, live hallucination demo</span><span class="sr-min">20m</span></div>
+        <div class="split-row lead"><span class="sr-time">0:20–0:42</span><span class="sr-owner" style="color:var(--accent-4);"><img class="sr-avatar" src="images/or.jpg" alt="Or" onerror="this.outerHTML='&lt;span class=sr-avatar-fallback&gt;O&lt;/span&gt;'">Or</span><span class="sr-seg">🩺 Clinical reasoning + cognitive bias in diagnosis</span><span class="sr-min">22m</span></div>
+        <div class="split-row lead"><span class="sr-time">0:42–1:04</span><span class="sr-owner" style="color:var(--accent-3);"><img class="sr-avatar" src="images/daphna.jpg" alt="Daphna" onerror="this.outerHTML='&lt;span class=sr-avatar-fallback&gt;D&lt;/span&gt;'">Daphna</span><span class="sr-seg">🔬 Patient-facing AI + Medint model + pediatric ED lens</span><span class="sr-min">22m</span></div>
+        <div class="split-row"><span class="sr-time">1:04–1:14</span><span class="sr-owner" style="color:var(--text-dim);">—</span><span class="sr-seg">☕ Break</span><span class="sr-min">10m</span></div>
+        <div class="split-row lead"><span class="sr-time">1:14–1:29</span><span class="sr-owner" style="color:var(--accent-2);"><img class="sr-avatar" src="images/itamar.jpg" alt="Itamar" onerror="this.outerHTML='&lt;span class=sr-avatar-fallback&gt;I&lt;/span&gt;'">Itamar</span><span class="sr-seg">📊 AI at hospital scale — data, governance, Soroka reality check</span><span class="sr-min">15m</span></div>
+        <div class="split-row"><span class="sr-time">1:29–1:51</span><span class="sr-owner" style="color:var(--text);"><span class="sr-avatar-stack"><img class="sr-avatar" src="images/yoad.jpg" alt="Yoad"><img class="sr-avatar" src="images/or.jpg" alt="Or"><img class="sr-avatar" src="images/daphna.jpg" alt="Daphna"><img class="sr-avatar" src="images/itamar.jpg" alt="Itamar"></span>All float</span><span class="sr-seg">🎯 Case Challenge — AI vs. no-AI, then swap</span><span class="sr-min">22m</span></div>
+        <div class="split-row"><span class="sr-time">1:51–1:58</span><span class="sr-owner" style="color:var(--text);"><span class="sr-avatar-stack"><img class="sr-avatar" src="images/or.jpg" alt="Or"><img class="sr-avatar" src="images/daphna.jpg" alt="Daphna"><img class="sr-avatar" src="images/itamar.jpg" alt="Itamar"></span>Or · Daphna · Itamar</span><span class="sr-seg">🔍 Live debrief — compare outcomes, three clinical lenses</span><span class="sr-min">7m</span></div>
+        <div class="split-row lead"><span class="sr-time">1:58–2:00</span><span class="sr-owner" style="color:var(--accent);"><img class="sr-avatar" src="images/yoad.jpg" alt="Yoad" onerror="this.outerHTML='&lt;span class=sr-avatar-fallback&gt;Y&lt;/span&gt;'">Yoad</span><span class="sr-seg">🎤 Close — post-workshop poll + "copilot-to-agent" vision</span><span class="sr-min">2m</span></div>
       </div>
 
       <div class="split-totals">
         <span><b>Yoad</b> 22m total</span>
-        <span><b>Or</b> 15m + debrief</span>
-        <span><b>Daphna</b> 15m + debrief</span>
+        <span><b>Or</b> 22m + debrief</span>
+        <span><b>Daphna</b> 22m + debrief</span>
         <span><b>Itamar</b> 15m + debrief</span>
-        <span><b>AI vs no-AI</b> 30m</span>
+        <span><b>AI vs no-AI</b> 22m</span>
       </div>
     </div>
 
@@ -680,7 +677,7 @@
         <div class="speaker-avatar"><img src="images/yoad.jpg" alt="Yoad Dvir" onerror="this.parentNode.textContent='Y'"></div>
         <div class="speaker-name">Yoad Dvir</div>
         <div class="speaker-role">Cyber · AI Tech</div>
-        <div class="speaker-cred">Sets the foundations — how LLMs actually work and why medicine is uniquely hard for them.</div>
+        <div class="speaker-cred">Opens with workshop intro + objectives, then the foundations — how LLMs actually work and why medicine is uniquely hard for them.</div>
         <span class="speaker-slot">20 min · opens</span>
       </div>
       <div class="speaker-card" style="--card-accent: var(--accent-4);">
@@ -689,7 +686,7 @@
         <div class="speaker-name">Or Degany</div>
         <div class="speaker-role">Clinical · Hadassah</div>
         <div class="speaker-cred">Anchors the workshop in clinical practice and diagnostic reasoning — designs the cases.</div>
-        <span class="speaker-slot">15 min</span>
+        <span class="speaker-slot">22 min</span>
       </div>
       <div class="speaker-card" style="--card-accent: var(--accent-3);">
         <span class="speaker-order">03</span>
@@ -697,7 +694,7 @@
         <div class="speaker-name">Daphna Idan</div>
         <div class="speaker-role">Clinical · Research</div>
         <div class="speaker-cred">Bridges the patient-facing AI frontier — Medint's model for complex case navigation.</div>
-        <span class="speaker-slot">15 min</span>
+        <span class="speaker-slot">22 min</span>
       </div>
       <div class="speaker-card" style="--card-accent: var(--accent-2);">
         <span class="speaker-order">04</span>
@@ -770,10 +767,11 @@
         <div class="bio-brings">
           <h5>What Yoad brings to the room</h5>
           <ul>
+            <li><strong>Opens the workshop — intro &amp; objectives.</strong> Welcomes the room, introduces the four speakers, and sets the three objectives: (1) understand how AI chatbots really work, (2) learn to prompt them safely for clinical reasoning, (3) know when to trust the output and when not to.</li>
             <li>Plain-language explanation of how LLMs actually work — next-token prediction, context windows, why "understanding" is a loaded word</li>
             <li>Live prompting demo: vague prompt vs. structured clinical prompt. Then deliberately trigger a hallucination on screen.</li>
             <li>The outsider lens — the only non-clinician, which keeps the tech honest for an audience that needs the mechanics, not the hype</li>
-            <li>Tooling backbone: Slido polls, demo choreography, backup screenshots, offline fallback, post-survey delta</li>
+            <li>Tooling backbone: Slido polls, demo choreography, backup screenshots, offline fallback, post-workshop feedback poll</li>
             <li>Closes the workshop with the "copilot-to-agent" vision — where clinical AI is heading next</li>
           </ul>
         </div>
@@ -786,7 +784,7 @@
       <div>
         <div class="bio-head">
           <span class="bio-name">Or Degany</span>
-          <span class="bio-tag">15 min</span>
+          <span class="bio-tag">22 min</span>
         </div>
         <div class="bio-title">MD · Hadassah Medical Center · Tel Aviv University · Clinical lead &amp; case author</div>
         <div class="bio-brings">
@@ -808,7 +806,7 @@
       <div>
         <div class="bio-head">
           <span class="bio-name">Daphna Idan</span>
-          <span class="bio-tag">15 min</span>
+          <span class="bio-tag">22 min</span>
         </div>
         <div class="bio-title">MD Student & MPH, BGU · Head of Research, Medint · Pediatric ED physician assistant</div>
         <div class="bio-brings">
@@ -877,19 +875,13 @@
     </div>
 
     <!-- BLOCK 1 -->
-    <h3 style="font-family:var(--serif);font-size:1.15rem;margin:1rem 0 1rem;">Block 1 — Foundations (0:00 → 0:55)</h3>
+    <h3 style="font-family:var(--serif);font-size:1.15rem;margin:1rem 0 1rem;">Block 1 — Foundations (0:00 → 1:04)</h3>
     <div class="timeline">
       <div class="timeline-block" style="--block-accent: var(--accent);">
-        <div class="time">0:00 — 0:05</div>
-        <h3>Welcome + Live Pre-Survey</h3>
-        <p>All four speakers on stage for a 30-second intro each. QR code on screen. Participants answer: specialty, AI experience, baseline confidence in AI for clinical decisions. Results shown live — sets the delta we'll measure at the end.</p>
-        <div class="tags"><span class="tag tag-all">All on stage</span></div>
-      </div>
-
-      <div class="timeline-block" style="--block-accent: var(--accent);">
-        <div class="time">0:05 — 0:25 · 20 min</div>
-        <h3>🧠 Yoad — What LLMs actually do (and don't) + the CLEAR prompting framework</h3>
-        <p>No hype, no fear. What large language models are, how they generate text (next-token prediction, not "understanding"), and why medicine is uniquely hard for them — rare conditions, evolving guidelines, conflicting evidence. <strong>Then teach the CLEAR framework</strong> (Ng, Frontiers in AI 2026) — a peer-reviewed, research-grade structure for medical prompting. Live demo: same clinical vignette, vague prompt vs. CLEAR prompt. Then deliberately trigger a hallucination. Audience sees it happen in real time.</p>
+        <div class="time">0:00 — 0:20 · 20 min</div>
+        <h3>🎙️ Yoad — Workshop intro, objectives + the AI foundations</h3>
+        <p><strong>Opens the workshop:</strong> welcomes the room, introduces the four speakers, and states the three objectives — (1) understand how AI chatbots really work, (2) learn to prompt them safely for clinical reasoning, (3) know when to trust the output and when not to.</p>
+        <p><strong>Then the foundations.</strong> No hype, no fear. What large language models are, how they generate text (next-token prediction, not "understanding"), and why medicine is uniquely hard for them — rare conditions, evolving guidelines, conflicting evidence. <strong>Then teach the CLEAR framework</strong> (Ng, Frontiers in AI 2026) — a peer-reviewed, research-grade structure for medical prompting. Live demo: same clinical vignette, vague prompt vs. CLEAR prompt. Then deliberately trigger a hallucination. Audience sees it happen in real time.</p>
 
         <!-- CLEAR framework embedded -->
         <div class="clear-grid">
@@ -905,41 +897,41 @@
       </div>
 
       <div class="timeline-block" style="--block-accent: var(--accent-4);">
-        <div class="time">0:25 — 0:40</div>
+        <div class="time">0:20 — 0:42 · 22 min</div>
         <h3>🩺 Or — Clinical reasoning under AI</h3>
         <p>The clinician's view. How diagnostic reasoning really works — pattern recognition, Bayesian updating, the differential. Where cognitive bias creeps in (anchoring, availability, premature closure) and which of those biases AI mitigates vs. amplifies. Sets up the case challenge that comes later.</p>
         <div class="tags"><span class="tag tag-or">Or leads</span></div>
       </div>
 
       <div class="timeline-block" style="--block-accent: var(--accent-3);">
-        <div class="time">0:40 — 0:55</div>
+        <div class="time">0:42 — 1:04 · 22 min</div>
         <h3>🔬 Daphna — The patient-facing frontier</h3>
         <p>Medint's model: how AI-augmented research teams help patients navigate rare, complex, and second-opinion cases — and what that teaches us about responsible clinical AI. Pediatric ED perspective on high-stakes, time-pressured decisions. Bridges "patients using ChatGPT" to "clinicians using AI well."</p>
         <div class="tags"><span class="tag tag-daphna">Daphna leads</span></div>
       </div>
     </div>
 
-    <div class="break-divider"><span>☕ 10-minute break · 0:55 → 1:05</span></div>
+    <div class="break-divider"><span>☕ 10-minute break · 1:04 → 1:14</span></div>
 
     <!-- BLOCK 2 -->
-    <h3 style="font-family:var(--serif);font-size:1.15rem;margin:1rem 0 1rem;">Block 2 — Pressure test (1:05 → 2:00)</h3>
+    <h3 style="font-family:var(--serif);font-size:1.15rem;margin:1rem 0 1rem;">Block 2 — Pressure test (1:14 → 2:00)</h3>
     <div class="timeline">
       <div class="timeline-block" style="--block-accent: var(--accent-2);">
-        <div class="time">1:05 — 1:20</div>
+        <div class="time">1:14 — 1:29 · 15 min</div>
         <h3>📊 Itamar — AI meets the hospital</h3>
         <p>The system view. What the data actually shows about AI accuracy, bias, and failure modes at scale. Human-in-the-loop vs. human-on-the-loop governance. What's already live at Soroka, what's next 12 months, and what belongs in the "not yet" column. Lands the workshop in implementation reality.</p>
         <div class="tags"><span class="tag tag-itamar">Itamar leads</span></div>
       </div>
 
       <div class="timeline-block" style="--block-accent: var(--accent-3);">
-        <div class="time">1:20 — 1:50</div>
+        <div class="time">1:29 — 1:51 · 22 min</div>
         <h3>🎯 Case Challenge — AI vs. no-AI</h3>
         <p><strong>Round 1:</strong> Half the room works the case <em>with</em> AI tools. The other half works it <em>without</em>. <strong>Round 2:</strong> New case — the groups swap. By the end, every table has tried both. Each table submits their diagnosis and confidence via a phone poll. All four speakers circulate between tables. This is the heart of the workshop.</p>
         <div class="tags"><span class="tag tag-all">All float</span></div>
       </div>
 
       <div class="timeline-block" style="--block-accent: var(--accent-4);">
-        <div class="time">1:50 — 1:58</div>
+        <div class="time">1:51 — 1:58 · 7 min</div>
         <h3>🔍 Live Debrief — Compare outcomes</h3>
         <p>Results side by side: AI-assisted vs. unassisted. What did AI catch that humans missed? What did AI get wrong that humans caught? Or interprets clinically. Itamar interprets the data pattern. Daphna reflects on the patient-facing implications. Facilitated — this is where the real learning happens.</p>
         <div class="tags"><span class="tag tag-or">Or</span><span class="tag tag-itamar">Itamar</span><span class="tag tag-daphna">Daphna</span></div>
@@ -948,7 +940,7 @@
       <div class="timeline-block" style="--block-accent: var(--accent);">
         <div class="time">1:58 — 2:00</div>
         <h3>Takeaways + Post-Survey + Closing Vision</h3>
-        <p>Yoad closes with the 90-second "copilot to agent" vision — where clinical AI is heading. Same confidence question as pre-survey — show the delta live. Optional consent for research data use.</p>
+        <p>Yoad closes with the 90-second "copilot to agent" vision — where clinical AI is heading. Short post-workshop confidence poll. Optional consent for research data use.</p>
         <div class="tags"><span class="tag tag-yoad">Yoad closes</span><span class="tag tag-all">All on stage</span></div>
       </div>
     </div>
@@ -1162,7 +1154,7 @@
         <ul>
           <li>20-min opening: LLM fundamentals, prompting framework, live hallucination demo</li>
           <li>Drives all tool interactions on screen (ChatGPT, Claude, Glass, Medint walkthrough)</li>
-          <li>Slido setup, QR codes, pre/post surveys, case submission infrastructure</li>
+          <li>Slido setup, QR codes, post-workshop poll, case submission infrastructure</li>
           <li>Data collection design — survey structure, consent if research angle approved</li>
           <li>Closing "copilot-to-agent" vision — 90 seconds to land the workshop</li>
           <li>Backup package — offline screenshots, printed fallback</li>
@@ -1187,7 +1179,7 @@
           <li>Bridges "patients using AI" (opening stats) to "clinicians using AI well"</li>
           <li>Co-facilitates the hands-on exercise — coaches tables on source evaluation</li>
           <li>Contributes patient-facing perspective to the debrief</li>
-          <li>Helps design the post-survey to capture research-quality data</li>
+          <li>Helps design the post-workshop poll to capture research-quality data</li>
         </ul>
       </div>
       <div class="role-card" style="--card-accent: var(--accent-2);">
@@ -1213,56 +1205,49 @@
         <div style="padding:0.6rem;background:var(--surface-2);font-weight:600;border-bottom:1px solid var(--border);color:var(--accent-3);text-align:center;">Daphna</div>
         <div style="padding:0.6rem;background:var(--surface-2);font-weight:600;border-bottom:1px solid var(--border);color:var(--accent-2);text-align:center;">Itamar</div>
 
-        <div style="padding:0.5rem;border-bottom:1px solid var(--border);color:var(--text-dim);">0:00–0:05</div>
-        <div style="padding:0.5rem;border-bottom:1px solid var(--border);color:var(--text-muted);">Welcome + Pre-Survey</div>
-        <div style="padding:0.5rem;border-bottom:1px solid var(--border);text-align:center;color:var(--accent);">Co</div>
-        <div style="padding:0.5rem;border-bottom:1px solid var(--border);text-align:center;color:var(--accent-4);">Co</div>
-        <div style="padding:0.5rem;border-bottom:1px solid var(--border);text-align:center;color:var(--accent-3);">Co</div>
-        <div style="padding:0.5rem;border-bottom:1px solid var(--border);text-align:center;color:var(--accent-2);">Co</div>
-
-        <div style="padding:0.5rem;border-bottom:1px solid var(--border);color:var(--text-dim);">0:05–0:25</div>
-        <div style="padding:0.5rem;border-bottom:1px solid var(--border);color:var(--text-muted);">LLM Foundations + Live Demo</div>
+        <div style="padding:0.5rem;border-bottom:1px solid var(--border);color:var(--text-dim);">0:00–0:20</div>
+        <div style="padding:0.5rem;border-bottom:1px solid var(--border);color:var(--text-muted);">Intro + objectives + LLM foundations + live demo</div>
         <div style="padding:0.5rem;border-bottom:1px solid var(--border);text-align:center;color:var(--accent);font-weight:700;">LEAD</div>
         <div style="padding:0.5rem;border-bottom:1px solid var(--border);text-align:center;color:var(--text-dim);">—</div>
         <div style="padding:0.5rem;border-bottom:1px solid var(--border);text-align:center;color:var(--text-dim);">—</div>
         <div style="padding:0.5rem;border-bottom:1px solid var(--border);text-align:center;color:var(--text-dim);">—</div>
 
-        <div style="padding:0.5rem;border-bottom:1px solid var(--border);color:var(--text-dim);">0:25–0:40</div>
+        <div style="padding:0.5rem;border-bottom:1px solid var(--border);color:var(--text-dim);">0:20–0:42</div>
         <div style="padding:0.5rem;border-bottom:1px solid var(--border);color:var(--text-muted);">Clinical Reasoning + Bias</div>
         <div style="padding:0.5rem;border-bottom:1px solid var(--border);text-align:center;color:var(--text-dim);">—</div>
         <div style="padding:0.5rem;border-bottom:1px solid var(--border);text-align:center;color:var(--accent-4);font-weight:700;">LEAD</div>
         <div style="padding:0.5rem;border-bottom:1px solid var(--border);text-align:center;color:var(--text-dim);">—</div>
         <div style="padding:0.5rem;border-bottom:1px solid var(--border);text-align:center;color:var(--text-dim);">—</div>
 
-        <div style="padding:0.5rem;border-bottom:1px solid var(--border);color:var(--text-dim);">0:40–0:55</div>
+        <div style="padding:0.5rem;border-bottom:1px solid var(--border);color:var(--text-dim);">0:42–1:04</div>
         <div style="padding:0.5rem;border-bottom:1px solid var(--border);color:var(--text-muted);">Patient-facing AI + Medint</div>
         <div style="padding:0.5rem;border-bottom:1px solid var(--border);text-align:center;color:var(--text-dim);">—</div>
         <div style="padding:0.5rem;border-bottom:1px solid var(--border);text-align:center;color:var(--text-dim);">—</div>
         <div style="padding:0.5rem;border-bottom:1px solid var(--border);text-align:center;color:var(--accent-3);font-weight:700;">LEAD</div>
         <div style="padding:0.5rem;border-bottom:1px solid var(--border);text-align:center;color:var(--text-dim);">—</div>
 
-        <div style="padding:0.5rem;border-bottom:1px solid var(--border);color:var(--text-dim);">0:55–1:05</div>
+        <div style="padding:0.5rem;border-bottom:1px solid var(--border);color:var(--text-dim);">1:04–1:14</div>
         <div style="padding:0.5rem;border-bottom:1px solid var(--border);color:var(--text-muted);">☕ Break</div>
         <div style="padding:0.5rem;border-bottom:1px solid var(--border);text-align:center;color:var(--text-dim);" colspan="4">—</div>
         <div style="padding:0.5rem;border-bottom:1px solid var(--border);text-align:center;color:var(--text-dim);">—</div>
         <div style="padding:0.5rem;border-bottom:1px solid var(--border);text-align:center;color:var(--text-dim);">—</div>
         <div style="padding:0.5rem;border-bottom:1px solid var(--border);text-align:center;color:var(--text-dim);">—</div>
 
-        <div style="padding:0.5rem;border-bottom:1px solid var(--border);color:var(--text-dim);">1:05–1:20</div>
+        <div style="padding:0.5rem;border-bottom:1px solid var(--border);color:var(--text-dim);">1:14–1:29</div>
         <div style="padding:0.5rem;border-bottom:1px solid var(--border);color:var(--text-muted);">AI at Hospital Scale</div>
         <div style="padding:0.5rem;border-bottom:1px solid var(--border);text-align:center;color:var(--text-dim);">—</div>
         <div style="padding:0.5rem;border-bottom:1px solid var(--border);text-align:center;color:var(--text-dim);">—</div>
         <div style="padding:0.5rem;border-bottom:1px solid var(--border);text-align:center;color:var(--text-dim);">—</div>
         <div style="padding:0.5rem;border-bottom:1px solid var(--border);text-align:center;color:var(--accent-2);font-weight:700;">LEAD</div>
 
-        <div style="padding:0.5rem;border-bottom:1px solid var(--border);color:var(--text-dim);">1:20–1:50</div>
+        <div style="padding:0.5rem;border-bottom:1px solid var(--border);color:var(--text-dim);">1:29–1:51</div>
         <div style="padding:0.5rem;border-bottom:1px solid var(--border);color:var(--text-muted);">Case Challenge (Crossover)</div>
         <div style="padding:0.5rem;border-bottom:1px solid var(--border);text-align:center;color:var(--accent);">Float</div>
         <div style="padding:0.5rem;border-bottom:1px solid var(--border);text-align:center;color:var(--accent-4);">Float</div>
         <div style="padding:0.5rem;border-bottom:1px solid var(--border);text-align:center;color:var(--accent-3);">Float</div>
         <div style="padding:0.5rem;border-bottom:1px solid var(--border);text-align:center;color:var(--accent-2);">Float</div>
 
-        <div style="padding:0.5rem;border-bottom:1px solid var(--border);color:var(--text-dim);">1:50–1:58</div>
+        <div style="padding:0.5rem;border-bottom:1px solid var(--border);color:var(--text-dim);">1:51–1:58</div>
         <div style="padding:0.5rem;border-bottom:1px solid var(--border);color:var(--text-muted);">Debrief</div>
         <div style="padding:0.5rem;border-bottom:1px solid var(--border);text-align:center;color:var(--text-dim);">Support</div>
         <div style="padding:0.5rem;border-bottom:1px solid var(--border);text-align:center;color:var(--accent-4);font-weight:600;">Co-lead</div>
@@ -1402,8 +1387,8 @@
 </section>
 
 <div class="footer-note">
-  Internal sync site · Yoad, Or, Daphna, Itamar · April 2026<br>
-  Prague Autoimmunity Congress · For team planning — not a public announcement.
+  AI at the Bedside · Yoad Dvir · Or Degany · Daphna Idan · Itamar Ben Shitrit<br>
+  Prague Autoimmunity Congress · 2026
 </div>
 
 <script>

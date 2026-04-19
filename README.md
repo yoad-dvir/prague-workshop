@@ -1,6 +1,6 @@
-# Prague AI Workshop — Internal Sync Site
+# AI at the Bedside — Prague Autoimmunity Congress Workshop
 
-Internal planning site for the workshop **"AI at the Bedside: Clinical Reasoning in the Age of LLMs"** at the Prague Autoimmunity Congress.
+Production site for the workshop **"AI at the Bedside: Clinical Reasoning in the Age of AI Chatbots"** at the Prague Autoimmunity Congress.
 
 Live at: **https://yoad-dvir.github.io/prague-workshop/**
 
