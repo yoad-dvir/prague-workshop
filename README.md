@@ -2,22 +2,38 @@
 
 Internal planning site for the workshop **"AI at the Bedside: Clinical Reasoning in the Age of LLMs"** at the Prague Autoimmunity Congress.
 
-**Speakers:** Yoad Dvir · Or Shoenfeld · Daphna Idan · Itamar Ben Shitrit
+Live at: **https://yoad-dvir.github.io/prague-workshop/**
 
-## Deploy to GitHub Pages
+## Speakers
 
-```bash
-cd C:/Users/yoad.dvir/Documents/GitHub/prague-workshop
-git init
-git add .
-git commit -m "Initial workshop sync site"
-gh repo create prague-workshop --public --source=. --push
-gh api repos/yoad-dvir/prague-workshop/pages -X POST \
-  -f 'source[branch]=main' -f 'source[path]=/'
+| | Name | Role |
+|---|---|---|
+| 01 | **Yoad Dvir** | Cyber & AI technologist (Silverfort) — opens + closes |
+| 02 | **Or Degany** | MD, Hadassah Medical Center / Tel Aviv University — clinical lead |
+| 03 | **Daphna Idan** | MD student & MPH (BGU), Head of Research at Medint, Pediatric ED |
+| 04 | **Itamar Ben Shitrit** | MD, MPH, Chief of Staff & medical data analyst (Soroka / BGU) |
+
+## Adding speaker photos
+
+The site references four files under `images/`:
+
+```
+images/yoad.jpg
+images/or.jpg
+images/daphna.jpg
+images/itamar.jpg
 ```
 
-Live at: `https://yoad-dvir.github.io/prague-workshop/`
+Drop any JPG/PNG into that folder with those names — they'll replace the initial-letter fallback automatically. Any aspect ratio works (cropped to a circle via CSS). Square crops look best.
 
-## Edit
+## Edit & deploy
 
-Single-file site — open `index.html` in any browser, edit, push.
+```powershell
+cd C:/Users/yoad.dvir/Documents/GitHub/prague-workshop
+# edit index.html
+git add .
+git commit -m "your message"
+git push
+```
+
+GitHub Pages rebuilds in ~30 seconds.

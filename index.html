@@ -67,6 +67,51 @@
   .section-num.purple { background: var(--accent-4); }
 
   /* TIME SPLIT — hero's main asset */
+  /* Glossary */
+  .glossary {
+    background: linear-gradient(135deg, rgba(78,205,196,0.07), rgba(108,92,231,0.07));
+    border: 1px solid var(--border-light);
+    border-radius: 14px;
+    padding: 1.4rem 1.4rem 1.2rem;
+    margin: 2rem 0 2.2rem;
+    text-align: left;
+  }
+  .glossary-head { margin-bottom: 1rem; }
+  .glossary-eye {
+    display: block;
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.3rem;
+  }
+  .glossary-sub { display: block; font-size: 0.82rem; color: var(--text-muted); }
+  .glossary-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.8rem 1.2rem;
+  }
+  .glossary-item {
+    padding: 0.8rem 0.9rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+  }
+  .gl-term {
+    font-family: var(--serif);
+    font-size: 1rem;
+    color: var(--text);
+    margin-bottom: 0.25rem;
+  }
+  .gl-term .gl-alt { font-family: var(--sans); font-size: 0.78rem; color: var(--text-dim); font-style: italic; margin-left: 0.3rem; }
+  .gl-def { font-size: 0.82rem; color: var(--text-muted); line-height: 1.6; }
+  .gl-def b { color: var(--text); }
+  @media (max-width: 640px) {
+    .glossary-grid { grid-template-columns: 1fr; }
+    .glossary { padding: 1.1rem 1rem; }
+  }
+
   .time-split {
     background: linear-gradient(135deg, var(--surface) 0%, var(--surface-2) 100%);
     border: 1px solid var(--border-light);
@@ -89,11 +134,12 @@
 
   .split-bar {
     display: flex;
-    height: 44px;
-    border-radius: 8px;
+    height: 72px;
+    border-radius: 10px;
     overflow: hidden;
-    margin-bottom: 0.6rem;
+    margin-bottom: 0.5rem;
     border: 1px solid var(--border);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
   }
   .split-seg {
     flex: var(--seg);
@@ -101,9 +147,11 @@
     position: relative;
     display: flex; align-items: center; justify-content: center;
     font-family: var(--mono);
-    font-size: 0.65rem;
+    font-size: 0.78rem;
     color: var(--bg);
-    font-weight: 600;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    min-width: 0;
     letter-spacing: 0.04em;
     text-transform: uppercase;
     overflow: hidden;
@@ -111,13 +159,52 @@
     transition: flex 0.2s;
   }
   .split-seg::after {
-    content: attr(data-label) ' · ' attr(data-min) 'm';
-    padding: 0 0.4rem;
+    content: attr(data-label) '\A' attr(data-min) 'm';
+    white-space: pre-line;
+    text-align: center;
+    padding: 0 0.3rem;
+    line-height: 1.25;
+    text-transform: uppercase;
   }
   .split-seg[data-label="Break"]::after, .split-seg[data-label="Close"]::after, .split-seg[data-label="Welcome"]::after { color: var(--bg); }
+  /* small segments: show just the minute count, icon-style */
+  .split-seg[data-label="Close"]::after,
+  .split-seg[data-label="Welcome"]::after,
+  .split-seg[data-label="Break"]::after {
+    content: attr(data-min) 'm';
+    white-space: normal;
+  }
+  /* Time ruler below the bar */
+  .split-ruler {
+    display: flex;
+    justify-content: space-between;
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    color: var(--text-dim);
+    letter-spacing: 0.06em;
+    padding: 0 2px 0.2rem;
+    margin-bottom: 1rem;
+  }
+  .split-ruler span { position: relative; }
+  .split-ruler span::before {
+    content: '';
+    position: absolute;
+    top: -6px; left: 50%;
+    width: 1px; height: 4px;
+    background: var(--text-dim);
+    transform: translateX(-50%);
+  }
+  .split-ruler span:first-child::before { left: 0; transform: none; }
+  .split-ruler span:last-child::before { left: auto; right: 0; transform: none; }
   @media (max-width: 640px) {
-    .split-seg { font-size: 0; }
-    .split-seg::after { content: ''; }
+    .split-bar { height: 56px; }
+    .split-seg { font-size: 0.6rem; }
+    .split-seg::after { padding: 0 0.15rem; }
+    /* tiny segments on mobile: blank; rely on the schedule rows below */
+    .split-seg[style*="--seg:2"]::after,
+    .split-seg[style*="--seg:5"]::after,
+    .split-seg[style*="--seg:8"]::after { content: ''; }
+    .split-ruler { font-size: 0.6rem; }
   }
 
   .split-rows {
@@ -258,6 +345,13 @@
     color: var(--card-accent, var(--accent));
     border: 2px solid var(--card-accent, var(--accent));
     position: relative;
+    overflow: hidden;
+  }
+  .speaker-avatar img, .bio-avatar img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    display: block;
   }
   .speaker-card .speaker-order {
     position: absolute; top: 10px; right: 12px;
@@ -310,7 +404,11 @@
     gap: 1.4rem;
     align-items: start;
   }
-  @media (max-width: 640px) { .speaker-bio-card { grid-template-columns: 1fr; text-align: center; } }
+  @media (max-width: 640px) {
+    .speaker-bio-card { grid-template-columns: 1fr; text-align: center; }
+    .speaker-bio-card .bio-head { justify-content: center; }
+    .speaker-bio-card .bio-brings { text-align: left; }
+  }
 
   .speaker-bio-card .bio-avatar {
     width: 120px; height: 120px; border-radius: 50%;
@@ -321,6 +419,8 @@
     color: var(--card-accent, var(--accent));
     border: 2px solid var(--card-accent, var(--accent));
     margin: 0 auto;
+    overflow: hidden;
+    flex-shrink: 0;
   }
   .speaker-bio-card .bio-head {
     display: flex; align-items: baseline; gap: 0.8rem; flex-wrap: wrap; margin-bottom: 0.3rem;
@@ -439,8 +539,29 @@
 
   @media (max-width: 640px) {
     .nav-links a { font-size: 0.7rem; padding: 0.35rem 0.5rem; }
+    .nav-brand { font-size: 0.65rem; }
     .hero { padding: 90px 1rem 2.5rem; }
     .section { padding: 72px 1rem 2rem; }
+    .hero-sub { font-size: 0.95rem; line-height: 1.6; }
+    .hero-meta { gap: 1.2rem; margin-top: 1.8rem; }
+    .hero-meta-item .value { font-size: 1.35rem; }
+    .hero-meta-item .label { font-size: 0.65rem; }
+    .hero-badge { font-size: 0.62rem; padding: 0.3rem 0.7rem; }
+    .section-header h2 { font-size: 1.4rem; }
+    .time-split { padding: 1.2rem 0.9rem 1.1rem; margin: 1.5rem 0 2rem; }
+    .time-split-header h3 { font-size: 1.1rem; }
+    .time-split-header p { font-size: 0.8rem; }
+    .thesis-card { padding: 1.1rem 1rem; }
+    .thesis-card blockquote { font-size: 1rem; line-height: 1.5; }
+    .footer-note { padding: 2rem 1rem; font-size: 0.7rem; }
+    /* Ensure long boxed content doesn't overflow */
+    .section-inner > div[style*="padding"] { box-sizing: border-box; }
+    .discuss-item .q-header h4 { font-size: 0.88rem; }
+  }
+  @media (max-width: 380px) {
+    .hero h1 { font-size: 1.85rem; }
+    .hero-meta { gap: 0.8rem; }
+    .hero-meta-item .value { font-size: 1.2rem; }
   }
 </style>
 </head>
@@ -468,8 +589,42 @@
 <section class="section hero active" id="home">
   <div class="section-inner">
     <div class="hero-badge">Internal Sync · Prague Autoimmunity Congress</div>
-    <h1>AI at the Bedside:<br><em>Clinical Reasoning</em> in the Age of LLMs</h1>
-    <p class="hero-sub">A 2-hour interactive workshop for ~80 clinicians. Four speakers — one cyber/AI technologist and three clinicians — teaching how to use AI effectively at the point of care, and when not to trust it.</p>
+    <h1>AI at the Bedside:<br><em>Clinical Reasoning</em> in the Age of AI Chatbots</h1>
+    <p class="hero-sub">A 2-hour interactive workshop for ~80 clinicians. Four speakers — one cyber/AI technologist and three clinicians — teaching how to use AI tools effectively at the point of care, and when not to trust them.</p>
+
+    <!-- Plain-language glossary for the clinical audience -->
+    <div class="glossary">
+      <div class="glossary-head">
+        <span class="glossary-eye">Quick terms used in this workshop</span>
+        <span class="glossary-sub">Every term gets defined on first use — no jargon passes without explanation.</span>
+      </div>
+      <div class="glossary-grid">
+        <div class="glossary-item">
+          <div class="gl-term">LLM <span class="gl-alt">(Large Language Model)</span></div>
+          <div class="gl-def">The technology behind <b>ChatGPT</b>, <b>Claude</b>, <b>Gemini</b>. A computer program that predicts the next word given the words so far — trained on enormous amounts of text. It does not "understand" medicine; it pattern-matches on language.</div>
+        </div>
+        <div class="glossary-item">
+          <div class="gl-term">Prompt</div>
+          <div class="gl-def">The instruction or question you type into the AI. "Prompting" = the skill of writing instructions that get useful, safe output. A vague prompt gives a vague answer.</div>
+        </div>
+        <div class="glossary-item">
+          <div class="gl-term">Hallucination</div>
+          <div class="gl-def">When the AI states something false with full confidence — a made-up citation, a wrong dose, a guideline that doesn't exist. It isn't lying; it's pattern-matching gone wrong. We will trigger one live on screen.</div>
+        </div>
+        <div class="glossary-item">
+          <div class="gl-term">AI agent</div>
+          <div class="gl-def">A step beyond a chatbot — AI that doesn't just answer when asked, but acts on your behalf: watches, plans, follows up. Example: an ambient scribe that writes your note while you see the patient.</div>
+        </div>
+        <div class="glossary-item">
+          <div class="gl-term">Human-in-the-loop</div>
+          <div class="gl-def">A clinician must approve every AI decision before it reaches the patient. Used for diagnosis, medication, treatment plans.</div>
+        </div>
+        <div class="glossary-item">
+          <div class="gl-term">Human-on-the-loop</div>
+          <div class="gl-def">AI acts on its own for low-risk tasks (scheduling, routing messages); clinicians monitor through dashboards instead of approving each step.</div>
+        </div>
+      </div>
+    </div>
 
     <div class="hero-meta">
       <div class="hero-meta-item"><span class="value">2h</span><span class="label">Duration</span></div>
@@ -482,7 +637,7 @@
     <div class="time-split">
       <div class="time-split-header">
         <div class="tsh-eyebrow">The time split · at a glance</div>
-        <h3>Two hours · four voices · one crossover</h3>
+        <h3>Two hours · four voices</h3>
         <p>This is the spine. Every other decision bends around it.</p>
       </div>
 
@@ -493,9 +648,17 @@
         <div class="split-seg" style="--seg:15;--c:var(--accent-3);"     data-label="Daphna" data-min="15"></div>
         <div class="split-seg" style="--seg:10;--c:var(--text-dim);"     data-label="Break" data-min="10"></div>
         <div class="split-seg" style="--seg:15;--c:var(--accent-2);"     data-label="Itamar" data-min="15"></div>
-        <div class="split-seg" style="--seg:30;--c:var(--accent-3);"     data-label="Crossover" data-min="30"></div>
+        <div class="split-seg" style="--seg:30;--c:var(--accent-3);"     data-label="AI vs no-AI" data-min="30"></div>
         <div class="split-seg" style="--seg:8;--c:var(--accent-4);"      data-label="Debrief" data-min="8"></div>
         <div class="split-seg" style="--seg:2;--c:var(--accent);"        data-label="Close" data-min="2"></div>
+      </div>
+
+      <div class="split-ruler" aria-hidden="true">
+        <span>0:00</span>
+        <span>0:30</span>
+        <span>1:00</span>
+        <span>1:30</span>
+        <span>2:00</span>
       </div>
 
       <div class="split-rows">
@@ -515,7 +678,7 @@
         <span><b>Or</b> 15m + debrief</span>
         <span><b>Daphna</b> 15m + debrief</span>
         <span><b>Itamar</b> 15m + debrief</span>
-        <span><b>Crossover</b> 30m</span>
+        <span><b>AI vs no-AI</b> 30m</span>
       </div>
     </div>
 
@@ -523,7 +686,7 @@
     <div class="speaker-lineup">
       <div class="speaker-card" style="--card-accent: var(--accent);">
         <span class="speaker-order">01</span>
-        <div class="speaker-avatar">Y</div>
+        <div class="speaker-avatar"><img src="images/yoad.jpg" alt="Yoad Dvir" onerror="this.parentNode.textContent='Y'"></div>
         <div class="speaker-name">Yoad Dvir</div>
         <div class="speaker-role">Cyber · AI Tech</div>
         <div class="speaker-cred">Sets the foundations — how LLMs actually work and why medicine is uniquely hard for them.</div>
@@ -531,15 +694,15 @@
       </div>
       <div class="speaker-card" style="--card-accent: var(--accent-4);">
         <span class="speaker-order">02</span>
-        <div class="speaker-avatar">O</div>
-        <div class="speaker-name">Or Shoenfeld</div>
-        <div class="speaker-role">Clinical · Autoimmunity</div>
-        <div class="speaker-cred">Anchors the workshop in real rheumatology practice and diagnostic reasoning.</div>
+        <div class="speaker-avatar"><img src="images/or.jpg" alt="Or Degany" onerror="this.parentNode.textContent='O'"></div>
+        <div class="speaker-name">Or Degany</div>
+        <div class="speaker-role">Clinical · Hadassah</div>
+        <div class="speaker-cred">Anchors the workshop in clinical practice and diagnostic reasoning — designs the cases.</div>
         <span class="speaker-slot">15 min</span>
       </div>
       <div class="speaker-card" style="--card-accent: var(--accent-3);">
         <span class="speaker-order">03</span>
-        <div class="speaker-avatar">D</div>
+        <div class="speaker-avatar"><img src="images/daphna.jpg" alt="Daphna Idan" onerror="this.parentNode.textContent='D'"></div>
         <div class="speaker-name">Daphna Idan</div>
         <div class="speaker-role">Clinical · Research</div>
         <div class="speaker-cred">Bridges the patient-facing AI frontier — Medint's model for complex case navigation.</div>
@@ -547,7 +710,7 @@
       </div>
       <div class="speaker-card" style="--card-accent: var(--accent-2);">
         <span class="speaker-order">04</span>
-        <div class="speaker-avatar">I</div>
+        <div class="speaker-avatar"><img src="images/itamar.jpg" alt="Itamar Ben Shitrit" onerror="this.parentNode.textContent='I'"></div>
         <div class="speaker-name">Itamar Ben Shitrit</div>
         <div class="speaker-role">Clinical · Data</div>
         <div class="speaker-cred">Brings the system-level view — medical data, hospital operations, AI at scale.</div>
@@ -606,7 +769,7 @@
 
     <!-- YOAD -->
     <div class="speaker-bio-card" style="--card-accent: var(--accent);">
-      <div class="bio-avatar">Y</div>
+      <div class="bio-avatar"><img src="images/yoad.jpg" alt="Yoad Dvir" onerror="this.parentNode.textContent='Y'"></div>
       <div>
         <div class="bio-head">
           <span class="bio-name">Yoad Dvir</span>
@@ -628,17 +791,17 @@
 
     <!-- OR -->
     <div class="speaker-bio-card" style="--card-accent: var(--accent-4);">
-      <div class="bio-avatar">O</div>
+      <div class="bio-avatar"><img src="images/or.jpg" alt="Or Degany" onerror="this.parentNode.textContent='O'"></div>
       <div>
         <div class="bio-head">
-          <span class="bio-name">Or Shoenfeld</span>
+          <span class="bio-name">Or Degany</span>
           <span class="bio-tag">15 min</span>
         </div>
-        <div class="bio-title">Rheumatologist · clinical anchor · case author</div>
+        <div class="bio-title">MD · Hadassah Medical Center · Tel Aviv University · Clinical lead &amp; case author</div>
         <div class="bio-brings">
           <h5>What Or brings to the room</h5>
           <ul>
-            <li>Rheumatologist speaking to rheumatologists — the credibility anchor for the audience</li>
+            <li>Clinician speaking directly to the rheumatology audience — credibility anchor in the room</li>
             <li>Cognitive bias primer with real clinical stories: anchoring, availability, premature closure</li>
             <li>Clinical case design — validates the three autoimmune vignettes that drive the crossover exercise</li>
             <li>Narrates the live AI demos from the clinical side: what did the AI get right, what's medically wrong, where did it miss the pattern</li>
@@ -650,7 +813,7 @@
 
     <!-- DAPHNA -->
     <div class="speaker-bio-card" style="--card-accent: var(--accent-3);">
-      <div class="bio-avatar">D</div>
+      <div class="bio-avatar"><img src="images/daphna.jpg" alt="Daphna Idan" onerror="this.parentNode.textContent='D'"></div>
       <div>
         <div class="bio-head">
           <span class="bio-name">Daphna Idan</span>
@@ -672,7 +835,7 @@
 
     <!-- ITAMAR -->
     <div class="speaker-bio-card" style="--card-accent: var(--accent-2);">
-      <div class="bio-avatar">I</div>
+      <div class="bio-avatar"><img src="images/itamar.jpg" alt="Itamar Ben Shitrit" onerror="this.parentNode.textContent='I'"></div>
       <div>
         <div class="bio-head">
           <span class="bio-name">Itamar Ben Shitrit</span>
@@ -710,7 +873,7 @@
     <div class="section-header">
       <span class="section-num">Section 3 of 7</span>
       <div class="eyebrow">③ Workshop Structure</div>
-      <h2>Two blocks. Four voices. One crossover exercise.</h2>
+      <h2>Two blocks. Four voices. One AI-vs-no-AI exercise.</h2>
       <p>Block 1 builds the foundations across all four angles. Block 2 pressure-tests them with clinical dilemmas and live debrief.</p>
     </div>
 
@@ -753,7 +916,7 @@
       <div class="timeline-block" style="--block-accent: var(--accent-4);">
         <div class="time">0:25 — 0:40</div>
         <h3>🩺 Or — Clinical reasoning under AI</h3>
-        <p>The rheumatologist's view. How diagnostic reasoning really works — pattern recognition, Bayesian updating, the differential. Where cognitive bias creeps in (anchoring, availability, premature closure) and which of those biases AI mitigates vs. amplifies. Sets up the case challenge that comes later.</p>
+        <p>The clinician's view. How diagnostic reasoning really works — pattern recognition, Bayesian updating, the differential. Where cognitive bias creeps in (anchoring, availability, premature closure) and which of those biases AI mitigates vs. amplifies. Sets up the case challenge that comes later.</p>
         <div class="tags"><span class="tag tag-or">Or leads</span></div>
       </div>
 
@@ -779,8 +942,8 @@
 
       <div class="timeline-block" style="--block-accent: var(--accent-3);">
         <div class="time">1:20 — 1:50</div>
-        <h3>🎯 Case Challenge — AI vs. no-AI (crossover)</h3>
-        <p>Three clinical dilemmas projected on screen. Half the tables use AI tools, half work without AI. On the next case, they switch. Tables submit diagnosis and confidence via QR poll. All four speakers float between tables — each brings a different angle to the discussion. This is the heart of the workshop.</p>
+        <h3>🎯 Case Challenge — AI vs. no-AI</h3>
+        <p><strong>Round 1:</strong> Half the room works the case <em>with</em> AI tools. The other half works it <em>without</em>. <strong>Round 2:</strong> New case — the groups swap. By the end, every table has tried both. Each table submits their diagnosis and confidence via a phone poll. All four speakers circulate between tables. This is the heart of the workshop.</p>
         <div class="tags"><span class="tag tag-all">All float</span></div>
       </div>
 
@@ -799,23 +962,24 @@
       </div>
     </div>
 
-    <!-- Crossover diagram -->
+    <!-- AI vs No-AI diagram -->
     <div class="crossover-visual">
-      <h3>Crossover Design — the core exercise</h3>
+      <h3>How the AI vs. no-AI exercise works</h3>
+      <p style="text-align:center;font-size:0.88rem;color:var(--text-muted);margin:-0.4rem 0 1.2rem;max-width:520px;margin-left:auto;margin-right:auto;">The room is split in two. In round 1, one half uses AI; the other half doesn't. In round 2, they swap cases and swap conditions — so by the end, everyone has done both.</p>
       <div class="crossover-rounds">
         <div class="crossover-col">
           <div class="col-label">Tables 1–4</div>
-          <div class="crossover-cell cell-ai">Case 1: With AI</div>
-          <div class="crossover-cell cell-no-ai">Case 2: Without AI</div>
+          <div class="crossover-cell cell-ai">Case 1 · <b>With</b> AI</div>
+          <div class="crossover-cell cell-no-ai">Case 2 · <b>Without</b> AI</div>
         </div>
-        <div class="crossover-arrow">⇄</div>
+        <div class="crossover-arrow" aria-hidden="true">⇄</div>
         <div class="crossover-col">
           <div class="col-label">Tables 5–8</div>
-          <div class="crossover-cell cell-no-ai">Case 1: Without AI</div>
-          <div class="crossover-cell cell-ai">Case 2: With AI</div>
+          <div class="crossover-cell cell-no-ai">Case 1 · <b>Without</b> AI</div>
+          <div class="crossover-cell cell-ai">Case 2 · <b>With</b> AI</div>
         </div>
       </div>
-      <p class="crossover-note">Each group experiences both conditions. Enables direct comparison — and optional research data collection.</p>
+      <p class="crossover-note">Everyone experiences both conditions. Makes the comparison fair — and (if we want it) makes this a publishable study.</p>
     </div>
 
     <div class="callout" style="background:linear-gradient(135deg,rgba(78,205,196,0.06),rgba(108,92,231,0.06));border-color:var(--border);">
@@ -1021,7 +1185,7 @@
           <li>Clinical case design — validates the three autoimmune vignettes</li>
           <li>Narrates AI demos clinically — "what's right, what's wrong, why it matters"</li>
           <li>Leads the post-case debrief through a clinical lens</li>
-          <li>Credibility anchor — rheumatologist speaking to rheumatologists</li>
+          <li>Credibility anchor — clinician speaking directly to the rheumatology audience</li>
         </ul>
       </div>
       <div class="role-card" style="--card-accent: var(--accent-3);">
