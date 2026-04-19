@@ -51,6 +51,69 @@
   .hero h1 { font-family: var(--serif); font-size: clamp(2.2rem, 5vw, 3.4rem); line-height: 1.15; margin-bottom: 1rem; color: var(--text); position: relative; }
   .hero h1 em { color: var(--accent); font-style: italic; }
   .hero-sub { font-size: 1.1rem; color: var(--text-muted); max-width: 600px; margin: 0 auto 2rem; line-height: 1.7; position: relative; }
+  /* Big CTA button that points to the timeline */
+  .timeline-cta {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.3rem;
+    margin: 2rem auto 0;
+    padding: 1.1rem 2rem 1.6rem;
+    background: linear-gradient(135deg, var(--accent) 0%, var(--accent-4) 100%);
+    color: var(--bg);
+    text-decoration: none;
+    border-radius: 16px;
+    box-shadow: 0 10px 40px rgba(78,205,196,0.25), 0 4px 12px rgba(108,92,231,0.2);
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    cursor: pointer;
+    min-width: 280px;
+  }
+  .timeline-cta:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 16px 48px rgba(78,205,196,0.35), 0 6px 16px rgba(108,92,231,0.3);
+  }
+  .timeline-cta:active { transform: translateY(-1px); }
+  .timeline-cta::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(255,255,255,0.12) 0%, transparent 50%);
+    pointer-events: none;
+  }
+  .tcta-label {
+    font-family: var(--serif);
+    font-size: 1.3rem;
+    font-weight: 400;
+    letter-spacing: 0.01em;
+    line-height: 1.1;
+  }
+  .tcta-sub {
+    font-family: var(--sans);
+    font-size: 0.78rem;
+    font-weight: 500;
+    opacity: 0.82;
+    letter-spacing: 0.02em;
+  }
+  .tcta-arrow {
+    font-size: 1.6rem;
+    font-weight: 700;
+    margin-top: 0.25rem;
+    animation: bounce-down 1.6s ease-in-out infinite;
+    line-height: 1;
+  }
+  @keyframes bounce-down {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(6px); }
+  }
+  @media (max-width: 640px) {
+    .timeline-cta { padding: 0.9rem 1.4rem 1.3rem; min-width: 240px; margin-top: 1.5rem; }
+    .tcta-label { font-size: 1.1rem; }
+    .tcta-sub { font-size: 0.7rem; }
+    .tcta-arrow { font-size: 1.3rem; }
+  }
+
   .hero-meta { display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap; margin-top: 2.5rem; position: relative; }
   .hero-meta-item { text-align: center; }
   .hero-meta-item .value { font-family: var(--serif); font-size: 1.6rem; color: var(--text); display: block; }
@@ -67,6 +130,9 @@
   .section-num.purple { background: var(--accent-4); }
 
   /* TIME SPLIT — hero's main asset */
+  /* scroll-target offset so fixed nav doesn't hide the timeline title */
+  #timeline { scroll-margin-top: 72px; }
+
   /* Glossary */
   .glossary {
     background: linear-gradient(135deg, rgba(78,205,196,0.07), rgba(108,92,231,0.07));
@@ -179,49 +245,64 @@
     flex: var(--seg);
     background: var(--c);
     position: relative;
-    display: flex; align-items: center; justify-content: center;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
     font-family: var(--mono);
     font-size: 0.72rem;
     color: var(--bg);
     font-weight: 700;
     letter-spacing: 0.02em;
     min-width: 0;
-    padding: 0.35rem 0.3rem;
+    padding: 0.4rem 0.35rem;
     text-align: center;
-    line-height: 1.22;
+    line-height: 1.2;
+    overflow: hidden;
     letter-spacing: 0.04em;
     text-transform: uppercase;
     overflow: hidden;
     white-space: nowrap;
     transition: flex 0.2s;
   }
-  /* Each segment renders: NAME (bold) / topic (normal) / Xm (mono) */
+  /* Each segment renders: NAME (bold) / topic (normal) / Xm (mono), stacked */
   .split-seg .seg-name {
+    display: block;
     font-weight: 700;
     text-transform: uppercase;
-    font-size: 0.82rem;
+    font-size: 0.8rem;
     letter-spacing: 0.04em;
+    white-space: nowrap;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
   .split-seg .seg-topic {
-    display: block;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
     font-weight: 500;
-    font-size: 0.66rem;
+    font-size: 0.6rem;
     letter-spacing: 0.01em;
     text-transform: none;
-    opacity: 0.82;
-    margin: 0.2rem 0 0.2rem;
+    opacity: 0.85;
+    margin: 0.18rem 0.1rem;
     line-height: 1.2;
+    max-width: 100%;
+    overflow: hidden;
+    word-break: break-word;
   }
   .split-seg .seg-min {
     display: block;
-    font-size: 0.6rem;
+    font-size: 0.58rem;
     font-weight: 600;
-    opacity: 0.75;
+    opacity: 0.72;
     letter-spacing: 0.06em;
   }
-  /* For very small segments, hide the topic line so it stays legible */
+  /* Very small segments hide the topic line */
   .split-seg.tiny .seg-topic { display: none; }
-  .split-seg.tiny .seg-name { font-size: 0.7rem; }
+  .split-seg.tiny .seg-name { font-size: 0.68rem; }
+  .split-seg.tiny .seg-min { font-size: 0.54rem; }
+  /* Skinniest segments (Close 2m) drop minutes line entirely */
+  .split-seg[style*="--seg:2;"] .seg-min { display: none; }
+  .split-seg[style*="--seg:2;"] .seg-name { font-size: 0.6rem; }
   /* Time ruler below the bar */
   .split-ruler {
     display: flex;
@@ -245,15 +326,14 @@
   .split-ruler span:first-child::before { left: 0; transform: none; }
   .split-ruler span:last-child::before { left: auto; right: 0; transform: none; }
   @media (max-width: 640px) {
-    .split-bar { height: 70px; }
-    .split-seg { padding: 0.2rem 0.15rem; }
-    .split-seg .seg-name { font-size: 0.68rem; }
-    .split-seg .seg-topic { font-size: 0.55rem; margin: 0.1rem 0; }
-    .split-seg .seg-min { font-size: 0.55rem; }
-    /* On mobile drop topic for all to stay tight */
+    .split-bar { height: 64px; }
+    .split-seg { padding: 0.25rem 0.15rem; }
+    .split-seg .seg-name { font-size: 0.62rem; letter-spacing: 0.02em; }
+    .split-seg .seg-min { font-size: 0.52rem; margin-top: 0.15rem; }
+    /* Drop topic for all on mobile — too tight to read anyway */
     .split-seg .seg-topic { display: none; }
     .split-seg.tiny .seg-min { display: none; }
-    .split-ruler { font-size: 0.6rem; }
+    .split-ruler { font-size: 0.58rem; }
   }
 
   .split-rows {
@@ -666,6 +746,13 @@
     <h1>AI at the Bedside:<br><em>Clinical Reasoning</em> in the Age of AI Chatbots</h1>
     <p class="hero-sub">A 2-hour interactive workshop for ~80 clinicians. Four speakers — one cyber/AI technologist and three clinicians — teaching how to use AI tools effectively at the point of care, and when not to trust them. <a href="javascript:void(0)" onclick="switchTab('glossary', document.querySelector('.nav-links a:nth-child(7)'))" style="color:var(--accent);text-decoration:underline dotted;text-underline-offset:3px;">Quick glossary →</a></p>
 
+    <!-- Big scroll-to-timeline CTA -->
+    <a href="#timeline" class="timeline-cta" onclick="event.preventDefault(); document.getElementById('timeline').scrollIntoView({behavior:'smooth', block:'start'});">
+      <span class="tcta-label">See the Timeline</span>
+      <span class="tcta-sub">How the 2 hours flow, speaker by speaker</span>
+      <span class="tcta-arrow" aria-hidden="true">↓</span>
+    </a>
+
     <div class="hero-meta">
       <div class="hero-meta-item"><span class="value">2h</span><span class="label">Duration</span></div>
       <div class="hero-meta-item"><span class="value">4</span><span class="label">Speakers</span></div>
@@ -674,7 +761,7 @@
     </div>
 
     <!-- THE TIME SPLIT — main view -->
-    <div class="time-split">
+    <div class="time-split" id="timeline">
       <div class="time-split-banner">
         <span class="tsb-chip">AI at the Bedside</span>
         <span class="tsb-title">Clinical Reasoning in the Age of AI Chatbots</span>
