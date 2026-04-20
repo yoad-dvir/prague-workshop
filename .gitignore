@@ -1,0 +1,15 @@
+# Node dependencies — installed locally with `npm install`, never committed
+node_modules/
+package-lock.json
+
+# OS cruft
+.DS_Store
+Thumbs.db
+
+# Editor scratch
+.vscode/
+.idea/
+*.swp
+
+# Generated output (the .pptx is regenerated from make-slides.js)
+*.pptx
