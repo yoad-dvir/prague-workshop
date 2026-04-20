@@ -3,6 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0c0f14">
+<meta name="color-scheme" content="dark">
 <title>AI at the Bedside · Prague Autoimmunity Congress Workshop</title>
 <meta name="description" content="AI at the Bedside: Clinical Reasoning in the Age of AI Chatbots — a 2-hour workshop for clinicians at the Prague Autoimmunity Congress. Four speakers, three cases, one AI vs. no-AI exercise.">
 <meta name="robots" content="noindex,nofollow">
@@ -26,8 +28,42 @@
     --sans: 'DM Sans', -apple-system, sans-serif;
     --mono: 'JetBrains Mono', monospace;
   }
+  html { color-scheme: dark; scroll-behavior: smooth; }
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body { font-family: var(--sans); background: var(--bg); color: var(--text); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+
+  /* Skip link for keyboard users */
+  .skip-link {
+    position: absolute; top: -100px; left: 1rem;
+    background: var(--accent); color: var(--bg);
+    padding: 0.6rem 1rem; border-radius: 6px;
+    font-family: var(--mono); font-size: 0.75rem; font-weight: 700;
+    z-index: 200; text-decoration: none;
+  }
+  .skip-link:focus { top: 1rem; }
+
+  /* Global focus ring for keyboard users */
+  :focus { outline: none; }
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+
+  /* Balance long headings (no orphans) */
+  h1, h2, h3, .hero h1, .section-header h2, .time-split-header h3 {
+    text-wrap: balance;
+  }
+
+  /* Reduced motion: disable decorative animations for users who opt out */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.001ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.001ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
 
   /* Nav */
   .nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(12,15,20,0.85); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); padding: 0 2rem; }
@@ -35,8 +71,8 @@
   .nav-brand { font-family: var(--mono); font-size: 0.75rem; color: var(--accent); letter-spacing: 0.08em; text-transform: uppercase; }
   .nav-links { display: flex; gap: 0.2rem; overflow-x: auto; scrollbar-width: none; }
   .nav-links::-webkit-scrollbar { display: none; }
-  .nav-links a { color: var(--text-muted); text-decoration: none; font-size: 0.8rem; padding: 0.5rem 0.75rem; border-radius: 6px; transition: all 0.2s; font-weight: 500; white-space: nowrap; cursor: pointer; }
-  .nav-links a:hover, .nav-links a.active { color: var(--text); background: var(--surface-2); }
+  .nav-links button.nav-tab, .nav-links a { color: var(--text-muted); text-decoration: none; font-size: 0.8rem; padding: 0.5rem 0.75rem; border-radius: 6px; transition: color 0.2s ease, background-color 0.2s ease; font-weight: 500; white-space: nowrap; cursor: pointer; background: transparent; border: 0; font-family: inherit; -webkit-tap-highlight-color: transparent; touch-action: manipulation; }
+  .nav-links button.nav-tab:hover, .nav-links button.nav-tab.active, .nav-links a:hover, .nav-links a.active { color: var(--text); background: var(--surface-2); }
 
   /* Sections */
   .section { display: none; padding: 80px 1.5rem 3rem; min-height: 100vh; animation: fadeUp 0.4s ease; }
@@ -477,7 +513,7 @@
     border-radius: 14px;
     padding: 1.2rem 1.1rem;
     text-align: center;
-    transition: all 0.25s ease;
+    transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
     position: relative;
     overflow: hidden;
   }
@@ -655,7 +691,7 @@
 
   /* Discussion */
   .discuss-grid { display: grid; gap: 0.6rem; margin: 1.5rem 0; }
-  .discuss-item { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 1rem 1.2rem; cursor: pointer; transition: all 0.2s; }
+  .discuss-item { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 1rem 1.2rem; cursor: pointer; transition: border-color 0.2s ease, background-color 0.2s ease; }
   .discuss-item:hover { border-color: var(--border-light); }
   .discuss-item .q-header { display: flex; justify-content: space-between; align-items: center; gap: 1rem; }
   .discuss-item h4 { font-size: 0.9rem; font-weight: 600; }
@@ -721,21 +757,25 @@
 </head>
 <body>
 
+<!-- Skip link for keyboard users -->
+<a class="skip-link" href="#main-content">Skip to content</a>
+
 <!-- Nav -->
-<nav class="nav">
+<nav class="nav" aria-label="Workshop sections">
   <div class="nav-inner">
     <div class="nav-brand">AI at the Bedside · Prague 2026</div>
-    <div class="nav-links">
-      <a href="javascript:void(0)" onclick="switchTab('home', this)" class="active">① Overview</a>
-      <a href="javascript:void(0)" onclick="switchTab('speakers', this)">② Speakers</a>
-      <a href="javascript:void(0)" onclick="switchTab('structure', this)">③ Structure</a>
-      <a href="javascript:void(0)" onclick="switchTab('cases', this)">④ Cases</a>
-      <a href="javascript:void(0)" onclick="switchTab('tools', this)">⑤ Tools</a>
-      <a href="javascript:void(0)" onclick="switchTab('roles', this)">⑥ Roles</a>
-      <a href="javascript:void(0)" onclick="switchTab('glossary', this)">⑦ Glossary</a>
+    <div class="nav-links" role="tablist">
+      <button type="button" class="nav-tab active" role="tab" aria-selected="true"  onclick="switchTab('home', this)">① Overview</button>
+      <button type="button" class="nav-tab"        role="tab" aria-selected="false" onclick="switchTab('speakers', this)">② Speakers</button>
+      <button type="button" class="nav-tab"        role="tab" aria-selected="false" onclick="switchTab('structure', this)">③ Structure</button>
+      <button type="button" class="nav-tab"        role="tab" aria-selected="false" onclick="switchTab('cases', this)">④ Cases</button>
+      <button type="button" class="nav-tab"        role="tab" aria-selected="false" onclick="switchTab('tools', this)">⑤ Tools</button>
+      <button type="button" class="nav-tab"        role="tab" aria-selected="false" onclick="switchTab('roles', this)">⑥ Roles</button>
+      <button type="button" class="nav-tab"        role="tab" aria-selected="false" onclick="switchTab('glossary', this)">⑦ Glossary</button>
     </div>
   </div>
 </nav>
+<main id="main-content">
 
 <!-- ============================= -->
 <!-- ① OVERVIEW -->
@@ -744,10 +784,10 @@
   <div class="section-inner">
     <div class="hero-badge">Prague Autoimmunity Congress · Workshop</div>
     <h1>AI at the Bedside:<br><em>Clinical Reasoning</em> in the Age of AI Chatbots</h1>
-    <p class="hero-sub">A 2-hour interactive workshop for ~80 clinicians. Four speakers — one cyber/AI technologist and three clinicians — teaching how to use AI tools effectively at the point of care, and when not to trust them. <a href="javascript:void(0)" onclick="switchTab('glossary', document.querySelector('.nav-links a:nth-child(7)'))" style="color:var(--accent);text-decoration:underline dotted;text-underline-offset:3px;">Quick glossary →</a></p>
+    <p class="hero-sub">A 2-hour interactive workshop for 20–60 clinicians. Four speakers — one cyber/AI technologist and three clinicians — teaching how to use AI tools effectively at the point of care, and when not to trust them. <a href="#glossary" onclick="event.preventDefault(); switchTab('glossary', document.querySelector('.nav-links .nav-tab:nth-child(7)'))" style="color:var(--accent);text-decoration:underline dotted;text-underline-offset:3px;">Quick glossary →</a></p>
 
     <!-- Big scroll-to-timeline CTA -->
-    <a href="#timeline" class="timeline-cta" onclick="event.preventDefault(); document.getElementById('timeline').scrollIntoView({behavior:'smooth', block:'start'});">
+    <a href="#timeline" class="timeline-cta">
       <span class="tcta-label">See the Timeline</span>
       <span class="tcta-sub">How the 2 hours flow, speaker by speaker</span>
       <span class="tcta-arrow" aria-hidden="true">↓</span>
@@ -756,7 +796,7 @@
     <div class="hero-meta">
       <div class="hero-meta-item"><span class="value">2h</span><span class="label">Duration</span></div>
       <div class="hero-meta-item"><span class="value">4</span><span class="label">Speakers</span></div>
-      <div class="hero-meta-item"><span class="value">~80</span><span class="label">Participants</span></div>
+      <div class="hero-meta-item"><span class="value">20–60</span><span class="label">Participants</span></div>
       <div class="hero-meta-item"><span class="value">3</span><span class="label">Clinical Cases</span></div>
     </div>
 
@@ -773,11 +813,11 @@
       </div>
 
       <div class="split-bar">
-        <div class="split-seg" style="--seg:20;--c:var(--accent);"><span class="seg-name">Yoad</span><span class="seg-topic">🎙️ Intro + AI foundations</span><span class="seg-min">20m</span></div>
-        <div class="split-seg" style="--seg:20;--c:var(--accent-4);"><span class="seg-name">Or</span><span class="seg-topic">🩺 Clinical reasoning</span><span class="seg-min">20m</span></div>
+        <div class="split-seg" style="--seg:20;--c:var(--accent);"><span class="seg-name">Yoad</span><span class="seg-topic">🎙️ Intro + AI basics + tools</span><span class="seg-min">20m</span></div>
+        <div class="split-seg" style="--seg:20;--c:var(--accent-4);"><span class="seg-name">Or</span><span class="seg-topic">🩺 Rheumatology + clinical bias</span><span class="seg-min">20m</span></div>
         <div class="split-seg" style="--seg:20;--c:var(--accent-3);"><span class="seg-name">Daphna</span><span class="seg-topic">🔬 Patient-facing AI</span><span class="seg-min">20m</span></div>
         <div class="split-seg tiny" style="--seg:10;--c:var(--text-dim);"><span class="seg-name">☕ Break</span><span class="seg-min">10m</span></div>
-        <div class="split-seg" style="--seg:20;--c:var(--accent-2);"><span class="seg-name">Itamar</span><span class="seg-topic">📊 AI at hospital scale</span><span class="seg-min">20m</span></div>
+        <div class="split-seg" style="--seg:20;--c:var(--accent-2);"><span class="seg-name">Itamar</span><span class="seg-topic">📊 Do's &amp; Don'ts + risk</span><span class="seg-min">20m</span></div>
         <div class="split-seg" style="--seg:20;--c:var(--accent-3);"><span class="seg-name">AI vs no-AI</span><span class="seg-topic">🎯 Case exercise</span><span class="seg-min">20m</span></div>
         <div class="split-seg tiny" style="--seg:8;--c:var(--accent-4);"><span class="seg-name">Debrief</span><span class="seg-min">8m</span></div>
         <div class="split-seg tiny" style="--seg:2;--c:var(--accent);"><span class="seg-name">Close</span></div>
@@ -792,14 +832,14 @@
       </div>
 
       <div class="split-rows">
-        <div class="split-row lead"><span class="sr-time">0:00–0:20</span><span class="sr-owner" style="color:var(--accent);"><img class="sr-avatar" src="images/yoad.jpg" alt="Yoad" onerror="this.outerHTML='&lt;span class=sr-avatar-fallback&gt;Y&lt;/span&gt;'">Yoad</span><span class="sr-seg">🎙️ Workshop intro + objectives · 🧠 AI foundations — how LLMs work, prompting, live hallucination demo</span><span class="sr-min">20m</span></div>
-        <div class="split-row lead"><span class="sr-time">0:20–0:40</span><span class="sr-owner" style="color:var(--accent-4);"><img class="sr-avatar" src="images/or.jpg" alt="Or" onerror="this.outerHTML='&lt;span class=sr-avatar-fallback&gt;O&lt;/span&gt;'">Or</span><span class="sr-seg">🩺 Clinical reasoning + cognitive bias in diagnosis</span><span class="sr-min">20m</span></div>
-        <div class="split-row lead"><span class="sr-time">0:40–1:00</span><span class="sr-owner" style="color:var(--accent-3);"><img class="sr-avatar" src="images/daphna.jpg" alt="Daphna" onerror="this.outerHTML='&lt;span class=sr-avatar-fallback&gt;D&lt;/span&gt;'">Daphna</span><span class="sr-seg">🔬 Patient-facing AI + Medint model + pediatric ED lens</span><span class="sr-min">20m</span></div>
+        <div class="split-row lead"><span class="sr-time">0:00–0:20</span><span class="sr-owner" style="color:var(--accent);"><img class="sr-avatar" src="images/yoad.jpg" alt="Yoad" width="24" height="24" loading="lazy" onerror="this.outerHTML='&lt;span class=sr-avatar-fallback&gt;Y&lt;/span&gt;'">Yoad</span><span class="sr-seg">🎙️ Workshop intro + objectives · 🧠 AI foundations — how LLMs work, prompting, live hallucination demo</span><span class="sr-min">20m</span></div>
+        <div class="split-row lead"><span class="sr-time">0:20–0:40</span><span class="sr-owner" style="color:var(--accent-4);"><img class="sr-avatar" src="images/or.jpg" alt="Or" width="24" height="24" loading="lazy" onerror="this.outerHTML='&lt;span class=sr-avatar-fallback&gt;O&lt;/span&gt;'">Or</span><span class="sr-seg">🩺 AI in rheumatology (landscape) + cognitive bias + case setup</span><span class="sr-min">20m</span></div>
+        <div class="split-row lead"><span class="sr-time">0:40–1:00</span><span class="sr-owner" style="color:var(--accent-3);"><img class="sr-avatar" src="images/daphna.jpg" alt="Daphna" width="24" height="24" loading="lazy" onerror="this.outerHTML='&lt;span class=sr-avatar-fallback&gt;D&lt;/span&gt;'">Daphna</span><span class="sr-seg">🔬 Medint + research tools (NotebookLM · Undermind · Perplexity · Elicit)</span><span class="sr-min">20m</span></div>
         <div class="split-row"><span class="sr-time">1:00–1:10</span><span class="sr-owner" style="color:var(--text-dim);">—</span><span class="sr-seg">☕ Break</span><span class="sr-min">10m</span></div>
-        <div class="split-row lead"><span class="sr-time">1:10–1:30</span><span class="sr-owner" style="color:var(--accent-2);"><img class="sr-avatar" src="images/itamar.jpg" alt="Itamar" onerror="this.outerHTML='&lt;span class=sr-avatar-fallback&gt;I&lt;/span&gt;'">Itamar</span><span class="sr-seg">📊 AI at hospital scale — data, governance, Soroka reality check</span><span class="sr-min">20m</span></div>
-        <div class="split-row"><span class="sr-time">1:30–1:50</span><span class="sr-owner" style="color:var(--text);"><span class="sr-avatar-stack"><img class="sr-avatar" src="images/yoad.jpg" alt="Yoad"><img class="sr-avatar" src="images/or.jpg" alt="Or"><img class="sr-avatar" src="images/daphna.jpg" alt="Daphna"><img class="sr-avatar" src="images/itamar.jpg" alt="Itamar"></span>All float</span><span class="sr-seg">🎯 Case Challenge — AI vs. no-AI, then swap</span><span class="sr-min">20m</span></div>
-        <div class="split-row"><span class="sr-time">1:50–1:58</span><span class="sr-owner" style="color:var(--text);"><span class="sr-avatar-stack"><img class="sr-avatar" src="images/or.jpg" alt="Or"><img class="sr-avatar" src="images/daphna.jpg" alt="Daphna"><img class="sr-avatar" src="images/itamar.jpg" alt="Itamar"></span>Or · Daphna · Itamar</span><span class="sr-seg">🔍 Live debrief — compare outcomes, three clinical lenses</span><span class="sr-min">8m</span></div>
-        <div class="split-row lead"><span class="sr-time">1:58–2:00</span><span class="sr-owner" style="color:var(--accent);"><img class="sr-avatar" src="images/yoad.jpg" alt="Yoad" onerror="this.outerHTML='&lt;span class=sr-avatar-fallback&gt;Y&lt;/span&gt;'">Yoad</span><span class="sr-seg">🎤 Close — post-workshop poll + "copilot-to-agent" vision</span><span class="sr-min">2m</span></div>
+        <div class="split-row lead"><span class="sr-time">1:10–1:30</span><span class="sr-owner" style="color:var(--accent-2);"><img class="sr-avatar" src="images/itamar.jpg" alt="Itamar" width="24" height="24" loading="lazy" onerror="this.outerHTML='&lt;span class=sr-avatar-fallback&gt;I&lt;/span&gt;'">Itamar</span><span class="sr-seg">📊 Do's &amp; Don'ts + human-factors risks + governance</span><span class="sr-min">20m</span></div>
+        <div class="split-row"><span class="sr-time">1:30–1:50</span><span class="sr-owner" style="color:var(--text);"><span class="sr-avatar-stack" aria-hidden="true"><img class="sr-avatar" src="images/yoad.jpg" alt="" width="24" height="24" loading="lazy"><img class="sr-avatar" src="images/or.jpg" alt="" width="24" height="24" loading="lazy"><img class="sr-avatar" src="images/daphna.jpg" alt="" width="24" height="24" loading="lazy"><img class="sr-avatar" src="images/itamar.jpg" alt="" width="24" height="24" loading="lazy"></span>All float</span><span class="sr-seg">🎯 Case Challenge — AI vs. no-AI, then swap</span><span class="sr-min">20m</span></div>
+        <div class="split-row"><span class="sr-time">1:50–1:58</span><span class="sr-owner" style="color:var(--text);"><span class="sr-avatar-stack" aria-hidden="true"><img class="sr-avatar" src="images/or.jpg" alt="" width="24" height="24" loading="lazy"><img class="sr-avatar" src="images/daphna.jpg" alt="" width="24" height="24" loading="lazy"><img class="sr-avatar" src="images/itamar.jpg" alt="" width="24" height="24" loading="lazy"></span>Or · Daphna · Itamar</span><span class="sr-seg">🔍 Live debrief — compare outcomes, three clinical lenses</span><span class="sr-min">8m</span></div>
+        <div class="split-row lead"><span class="sr-time">1:58–2:00</span><span class="sr-owner" style="color:var(--accent);"><img class="sr-avatar" src="images/yoad.jpg" alt="Yoad" width="24" height="24" loading="lazy" onerror="this.outerHTML='&lt;span class=sr-avatar-fallback&gt;Y&lt;/span&gt;'">Yoad</span><span class="sr-seg">🎤 Close — post-workshop poll + "copilot-to-agent" vision</span><span class="sr-min">2m</span></div>
       </div>
 
       <div class="split-totals">
@@ -815,7 +855,7 @@
     <div class="speaker-lineup">
       <div class="speaker-card" style="--card-accent: var(--accent);">
         <span class="speaker-order">01</span>
-        <div class="speaker-avatar"><img src="images/yoad.jpg" alt="Yoad Dvir" onerror="this.parentNode.textContent='Y'"></div>
+        <div class="speaker-avatar"><img src="images/yoad.jpg" alt="Yoad Dvir" width="84" height="84" loading="lazy" onerror="this.parentNode.textContent='Y'"></div>
         <div class="speaker-name">Yoad Dvir</div>
         <div class="speaker-role">Cyber · AI Tech</div>
         <div class="speaker-cred">Opens with workshop intro + objectives, then the foundations — how LLMs actually work and why medicine is uniquely hard for them.</div>
@@ -823,7 +863,7 @@
       </div>
       <div class="speaker-card" style="--card-accent: var(--accent-4);">
         <span class="speaker-order">02</span>
-        <div class="speaker-avatar"><img src="images/or.jpg" alt="Or Degany" onerror="this.parentNode.textContent='O'"></div>
+        <div class="speaker-avatar"><img src="images/or.jpg" alt="Or Degany" width="84" height="84" loading="lazy" onerror="this.parentNode.textContent='O'"></div>
         <div class="speaker-name">Or Degany</div>
         <div class="speaker-role">Clinical · Hadassah</div>
         <div class="speaker-cred">Anchors the workshop in clinical practice and diagnostic reasoning — designs the cases.</div>
@@ -831,7 +871,7 @@
       </div>
       <div class="speaker-card" style="--card-accent: var(--accent-3);">
         <span class="speaker-order">03</span>
-        <div class="speaker-avatar"><img src="images/daphna.jpg" alt="Daphna Idan" onerror="this.parentNode.textContent='D'"></div>
+        <div class="speaker-avatar"><img src="images/daphna.jpg" alt="Daphna Idan" width="84" height="84" loading="lazy" onerror="this.parentNode.textContent='D'"></div>
         <div class="speaker-name">Daphna Idan</div>
         <div class="speaker-role">Clinical · Research</div>
         <div class="speaker-cred">Bridges the patient-facing AI frontier — Medint's model for complex case navigation.</div>
@@ -839,7 +879,7 @@
       </div>
       <div class="speaker-card" style="--card-accent: var(--accent-2);">
         <span class="speaker-order">04</span>
-        <div class="speaker-avatar"><img src="images/itamar.jpg" alt="Itamar Ben Shitrit" onerror="this.parentNode.textContent='I'"></div>
+        <div class="speaker-avatar"><img src="images/itamar.jpg" alt="Itamar Ben Shitrit" width="84" height="84" loading="lazy" onerror="this.parentNode.textContent='I'"></div>
         <div class="speaker-name">Itamar Ben Shitrit</div>
         <div class="speaker-role">Clinical · Data</div>
         <div class="speaker-cred">Brings the system-level view — medical data, hospital operations, AI at scale.</div>
@@ -898,7 +938,7 @@
 
     <!-- YOAD -->
     <div class="speaker-bio-card" style="--card-accent: var(--accent);">
-      <div class="bio-avatar"><img src="images/yoad.jpg" alt="Yoad Dvir" onerror="this.parentNode.textContent='Y'"></div>
+      <div class="bio-avatar"><img src="images/yoad.jpg" alt="Yoad Dvir" width="120" height="120" loading="lazy" onerror="this.parentNode.textContent='Y'"></div>
       <div>
         <div class="bio-head">
           <span class="bio-name">Yoad Dvir</span>
@@ -909,8 +949,10 @@
           <h5>What Yoad brings to the room</h5>
           <ul>
             <li><strong>Opens the workshop — intro &amp; objectives.</strong> Welcomes the room, introduces the four speakers, and sets the three objectives: (1) understand how AI chatbots really work, (2) learn to prompt them safely for clinical reasoning, (3) know when to trust the output and when not to.</li>
+            <li><strong>A 60-second history of clinical AI</strong> — ELIZA (1966) → DXplain (1984) → today's LLMs. Grounds the room in "this isn't new; the capability jump is."</li>
             <li>Plain-language explanation of how LLMs actually work — next-token prediction, context windows, why "understanding" is a loaded word</li>
-            <li>Live prompting demo: vague prompt vs. structured clinical prompt. Then deliberately trigger a hallucination on screen.</li>
+            <li><strong>The "Pick 4" tool tour</strong> — a deliberately short demo: ChatGPT (general), Claude (sibling model, different output), OpenEvidence (evidence-based), Glass Health (clinical-grade with citations). Presenting too many tools leaves the audience with nothing.</li>
+            <li><strong>Prompting framework — CLEAR</strong> (Ng, Frontiers in AI 2026). Live demo: vague prompt vs. structured clinical prompt on an autoimmune vignette. Then deliberately trigger a hallucination on screen.</li>
             <li>The outsider lens — the only non-clinician, which keeps the tech honest for an audience that needs the mechanics, not the hype</li>
             <li>Tooling backbone: Slido polls, demo choreography, backup screenshots, offline fallback, post-workshop feedback poll</li>
             <li>Closes the workshop with the "copilot-to-agent" vision — where clinical AI is heading next</li>
@@ -921,7 +963,7 @@
 
     <!-- OR -->
     <div class="speaker-bio-card" style="--card-accent: var(--accent-4);">
-      <div class="bio-avatar"><img src="images/or.jpg" alt="Or Degany" onerror="this.parentNode.textContent='O'"></div>
+      <div class="bio-avatar"><img src="images/or.jpg" alt="Or Degany" width="120" height="120" loading="lazy" onerror="this.parentNode.textContent='O'"></div>
       <div>
         <div class="bio-head">
           <span class="bio-name">Or Degany</span>
@@ -932,8 +974,10 @@
           <h5>What Or brings to the room</h5>
           <ul>
             <li>Clinician speaking directly to the rheumatology audience — credibility anchor in the room</li>
-            <li>Cognitive bias primer with real clinical stories: anchoring, availability, premature closure</li>
-            <li>Clinical case design — validates the three autoimmune vignettes that drive the crossover exercise</li>
+            <li><strong>AI in rheumatology — current landscape.</strong> Why rheumatologists need AI more than most specialties: noisy multi-system presentations, evolving criteria, the need for personalized diagnosis and treatment.</li>
+            <li><strong>Evidence snapshot:</strong> the Jan 2026 head-to-head study of <em>Prof. Valmed</em> vs. <em>ChatGPT-5 Thinking</em> vs. <em>OpenEvidence</em> on rheumatology cases — what it revealed about diagnostic performance, and where the tools still drift.</li>
+            <li>Cognitive bias primer with real clinical stories: anchoring, availability, premature closure — and which of those AI amplifies vs. mitigates</li>
+            <li>Clinical case design — validates the autoimmune vignettes that drive the AI-vs-no-AI exercise</li>
             <li>Narrates the live AI demos from the clinical side: what did the AI get right, what's medically wrong, where did it miss the pattern</li>
             <li>Leads the post-case debrief through a clinical lens</li>
           </ul>
@@ -943,7 +987,7 @@
 
     <!-- DAPHNA -->
     <div class="speaker-bio-card" style="--card-accent: var(--accent-3);">
-      <div class="bio-avatar"><img src="images/daphna.jpg" alt="Daphna Idan" onerror="this.parentNode.textContent='D'"></div>
+      <div class="bio-avatar"><img src="images/daphna.jpg" alt="Daphna Idan" width="120" height="120" loading="lazy" onerror="this.parentNode.textContent='D'"></div>
       <div>
         <div class="bio-head">
           <span class="bio-name">Daphna Idan</span>
@@ -954,6 +998,8 @@
           <h5>What Daphna brings to the room</h5>
           <ul>
             <li>The patient-facing frontier: Medint's model for AI-assisted navigation of complex, rare, and second-opinion cases</li>
+            <li><strong>Author perspective:</strong> co-author of <em>Idan &amp; Einav, 2026 — "Primer on large language models: an educational overview for intensivists."</em> Brings the structured, peer-reviewed framing of how clinicians should approach LLMs as tools, not oracles.</li>
+            <li><strong>Research-assistant tool tour</strong> — when and why to use <b>NotebookLM</b>, <b>Undermind</b>, <b>Perplexity</b>, <b>Elicit</b>, and <b>Glass</b>. Each has a different sweet spot; picking the wrong one wastes time or introduces risk.</li>
             <li>Evidence-based research lens — how structured literature synthesis meets LLM reasoning, and where that hybrid actually outperforms either alone</li>
             <li>Pediatric ED perspective — high-stakes decisions under time pressure, where AI augmentation has the most to prove</li>
             <li>Bridges "how patients use AI" (the opening stat frame) to "how research teams use AI responsibly" (the clinician's workflow)</li>
@@ -965,7 +1011,7 @@
 
     <!-- ITAMAR -->
     <div class="speaker-bio-card" style="--card-accent: var(--accent-2);">
-      <div class="bio-avatar"><img src="images/itamar.jpg" alt="Itamar Ben Shitrit" onerror="this.parentNode.textContent='I'"></div>
+      <div class="bio-avatar"><img src="images/itamar.jpg" alt="Itamar Ben Shitrit" width="120" height="120" loading="lazy" onerror="this.parentNode.textContent='I'"></div>
       <div>
         <div class="bio-head">
           <span class="bio-name">Itamar Ben Shitrit</span>
@@ -976,10 +1022,12 @@
           <h5>What Itamar brings to the room</h5>
           <ul>
             <li>The system-level lens — what happens when AI meets hospital operations, EHR data, and scaled workflows</li>
+            <li><strong>Do's &amp; Don'ts for clinicians</strong> — a four-minute block: safety, bias, hallucinations, privacy. The rules you can apply Monday morning without an ethics committee.</li>
+            <li><strong>Human-factors risk framework</strong> — grounded in the 2026 regulator-aligned guide for AI-enabled medical devices. Maps the seven concrete risks clinicians must watch for: <em>automation bias, trust miscalibration, deskilling, workflow disruption</em>, and three more.</li>
             <li>Medical data perspective: what the data says about AI's real-world accuracy, bias, and failure modes — beyond the published benchmarks</li>
             <li>Chief of Staff view on governance: human-in-the-loop vs. human-on-the-loop, who owns the risk, how institutions actually adopt (or reject) clinical AI</li>
-            <li>Grounds the workshop in implementation reality — what's already running at Soroka, what's hype, what's next 12 months</li>
-            <li>Co-leads the debrief from a data-driven angle: interprets the crossover results live</li>
+            <li>Grounds the workshop in implementation reality — what's already running at Soroka, what's hype, what's in the "not yet" column</li>
+            <li>Co-leads the debrief from a data-driven angle: interprets the AI-vs-no-AI results live</li>
           </ul>
         </div>
       </div>
@@ -1039,15 +1087,15 @@
 
       <div class="timeline-block" style="--block-accent: var(--accent-4);">
         <div class="time">0:20 — 0:40 · 20 min</div>
-        <h3>🩺 Or — Clinical reasoning under AI</h3>
-        <p>The clinician's view. How diagnostic reasoning really works — pattern recognition, Bayesian updating, the differential. Where cognitive bias creeps in (anchoring, availability, premature closure) and which of those biases AI mitigates vs. amplifies. Sets up the case challenge that comes later.</p>
+        <h3>🩺 Or — AI in rheumatology + clinical reasoning</h3>
+        <p>Why rheumatologists need AI more than most specialties — noise, multi-system presentations, evolving criteria, personalized Dx/Tx. Walks through the Jan 2026 head-to-head study (<em>Prof. Valmed vs. ChatGPT-5 Thinking vs. OpenEvidence</em>) — what it revealed about diagnostic performance, and where the tools still drift. Then the cognitive-bias primer — anchoring, availability, premature closure, and which AI mitigates vs. amplifies. Sets up the case exercise.</p>
         <div class="tags"><span class="tag tag-or">Or leads</span></div>
       </div>
 
       <div class="timeline-block" style="--block-accent: var(--accent-3);">
         <div class="time">0:40 — 1:00 · 20 min</div>
-        <h3>🔬 Daphna — The patient-facing frontier</h3>
-        <p>Medint's model: how AI-augmented research teams help patients navigate rare, complex, and second-opinion cases — and what that teaches us about responsible clinical AI. Pediatric ED perspective on high-stakes, time-pressured decisions. Bridges "patients using ChatGPT" to "clinicians using AI well."</p>
+        <h3>🔬 Daphna — Patient-facing AI + the research tool tour</h3>
+        <p>Medint's model: how AI-augmented research teams help patients navigate rare, complex, and second-opinion cases — and what that teaches us about responsible clinical AI. Hands-on tour of the research-assistant stack: <strong>NotebookLM</strong>, <strong>Undermind</strong>, <strong>Perplexity</strong>, <strong>Elicit</strong>, <strong>Glass</strong> — when each wins, when each fails. Grounded in her own peer-reviewed framing (<em>Idan &amp; Einav, 2026 — Primer on LLMs for intensivists</em>). Pediatric ED perspective on high-stakes, time-pressured decisions.</p>
         <div class="tags"><span class="tag tag-daphna">Daphna leads</span></div>
       </div>
     </div>
@@ -1059,8 +1107,8 @@
     <div class="timeline">
       <div class="timeline-block" style="--block-accent: var(--accent-2);">
         <div class="time">1:10 — 1:30 · 20 min</div>
-        <h3>📊 Itamar — AI meets the hospital</h3>
-        <p>The system view. What the data actually shows about AI accuracy, bias, and failure modes at scale. Human-in-the-loop vs. human-on-the-loop governance. What's already live at Soroka, what's next 12 months, and what belongs in the "not yet" column. Lands the workshop in implementation reality.</p>
+        <h3>📊 Itamar — Do's &amp; Don'ts + the human-factors framework</h3>
+        <p>The four-minute rules block: <strong>safety · bias · hallucinations · privacy</strong> — what to do, what to avoid, Monday morning. Then the <strong>human-factors risk framework</strong> (2026 regulator-aligned guide for AI-enabled medical devices): seven concrete risks — automation bias, trust miscalibration, deskilling, workflow disruption, and three more — each mapped to a design/evaluation recommendation. Human-in-the-loop vs. human-on-the-loop governance. What's already live at Soroka, what's hype, what's in the "not yet" column.</p>
         <div class="tags"><span class="tag tag-itamar">Itamar leads</span></div>
       </div>
 
@@ -1169,7 +1217,7 @@
     <div class="section-header">
       <span class="section-num">Section 5 of 7</span>
       <div class="eyebrow">⑤ Tools</div>
-      <h2>What we demo, what participants use, how we engage 80 people</h2>
+      <h2>What we demo, what participants use, how we engage the room</h2>
       <p>AI tools for demo and hands-on, plus audience interaction for polling and case submission.</p>
     </div>
 
@@ -1213,6 +1261,71 @@
       </div>
     </div>
 
+    <h3 style="font-size:0.92rem;margin:2rem 0 1rem;color:var(--text-muted);">Research assistants (Daphna's tour)</h3>
+    <p style="font-size:0.85rem;color:var(--text-muted);margin-bottom:1rem;">Not the same as general chatbots. These tools sit between you and the literature — each has a distinct sweet spot. Pick the right one for the task, not the one that's trending.</p>
+    <div class="tool-grid">
+      <div class="tool-card">
+        <div class="tool-icon" style="background:rgba(255,217,61,0.12);color:var(--accent-3);">N</div>
+        <div class="tool-info">
+          <div class="tool-type">Google · free</div>
+          <h4>NotebookLM</h4>
+          <p>Upload papers, guidelines, your own notes. Ask questions <em>bounded by those sources</em> — no hallucinated citations. Best for: synthesizing the papers you already trust.</p>
+        </div>
+        <span class="tool-purpose">Bounded Q&amp;A</span>
+      </div>
+      <div class="tool-card">
+        <div class="tool-icon" style="background:rgba(78,205,196,0.12);color:var(--accent);">U</div>
+        <div class="tool-info">
+          <div class="tool-type">Deep literature search</div>
+          <h4>Undermind</h4>
+          <p>Agentic search across tens of thousands of papers per query. Designed for exhaustive literature review — slow but thorough. Best for: "find everything on X."</p>
+        </div>
+        <span class="tool-purpose">Exhaustive search</span>
+      </div>
+      <div class="tool-card">
+        <div class="tool-icon" style="background:rgba(108,92,231,0.12);color:var(--accent-4);">P</div>
+        <div class="tool-info">
+          <div class="tool-type">Cited answers</div>
+          <h4>Perplexity</h4>
+          <p>Fast answers with inline citations. Good for scoping a topic quickly — but always verify the cited sources. Best for: "give me a starting point."</p>
+        </div>
+        <span class="tool-purpose">Fast scoping</span>
+      </div>
+      <div class="tool-card">
+        <div class="tool-icon" style="background:rgba(255,107,107,0.1);color:var(--accent-2);">E</div>
+        <div class="tool-info">
+          <div class="tool-type">Structured lit review</div>
+          <h4>Elicit</h4>
+          <p>Extracts structured data from papers (method, sample size, outcomes) into a comparison table. Best for: systematic-review-style work.</p>
+        </div>
+        <span class="tool-purpose">Structured extract</span>
+      </div>
+      <div class="tool-card">
+        <div class="tool-icon" style="background:rgba(255,217,61,0.12);color:var(--accent-3);">O</div>
+        <div class="tool-info">
+          <div class="tool-type">Evidence-based medical Q&amp;A</div>
+          <h4>OpenEvidence</h4>
+          <p>Free, clinician-focused, grounded in peer-reviewed medical literature with transparent citations. Featured in Or's rheumatology-landscape segment alongside Prof. Valmed and ChatGPT-5 Thinking.</p>
+        </div>
+        <span class="tool-purpose">Medical Q&amp;A</span>
+      </div>
+      <div class="tool-card">
+        <div class="tool-icon" style="background:rgba(78,205,196,0.12);color:var(--accent);">V</div>
+        <div class="tool-info">
+          <div class="tool-type">Rheumatology-specific</div>
+          <h4>Prof. Valmed</h4>
+          <p>Specialized clinical AI evaluated head-to-head against ChatGPT-5 Thinking and OpenEvidence in the Jan 2026 rheumatology diagnostic-performance study. Teaching reference point for "general vs. specialized AI."</p>
+        </div>
+        <span class="tool-purpose">Reference study</span>
+      </div>
+    </div>
+
+    <div class="callout" style="margin:1.5rem 0;background:rgba(255,217,61,0.06);border-color:rgba(255,217,61,0.3);">
+      <div class="rc-label" style="color:var(--accent-3);">🎯 The golden rule</div>
+      <h4>Pick 4 tools max — presenting too many leaves the audience with nothing</h4>
+      <p>Or's instinct from the prep notes — and it's right. The demo arc shows the <em>categories</em> of AI (general chatbot → sibling model → clinical-grade → research-grade → specialized), not every product in each category. Participants should leave knowing which <em>type</em> of tool to reach for, not remembering seven logos.</p>
+    </div>
+
     <h3 style="font-size:0.92rem;margin:2rem 0 1rem;color:var(--text-muted);">Audience interaction</h3>
     <div class="tool-grid">
       <div class="tool-card">
@@ -1220,16 +1333,16 @@
         <div class="tool-info">
           <div class="tool-type">Recommended</div>
           <h4>Slido</h4>
-          <p>Overlays on existing slides. QR-based polls, word clouds, Q&amp;A. No app install — works on phone browsers. ~$17.50/mo. Handles 80 cleanly.</p>
+          <p>Overlays on existing slides. QR-based polls, word clouds, Q&amp;A. No app install — works on phone browsers. ~$17.50/mo. Handles 20–60 participants cleanly.</p>
         </div>
         <span class="tool-purpose">Polls + Survey</span>
       </div>
     </div>
 
     <div class="callout" style="background:linear-gradient(135deg,rgba(78,205,196,0.06),rgba(108,92,231,0.06));border-color:var(--border);">
-      <div class="rc-label" style="color:var(--accent);">💡 The demo arc</div>
-      <h4>ChatGPT → Claude → Glass Health → Medint</h4>
-      <p>Start familiar and flawed (ChatGPT). Show a sibling model for contrast (Claude). Step up to clinical-grade with citations (Glass). Then show what responsible patient-facing AI looks like with humans in the loop (Medint, via Daphna). The progression tells one story: <em>AI is a spectrum, not a monolith — and the right tool for the job depends on who's in the loop.</em></p>
+      <div class="rc-label" style="color:var(--accent);">💡 The demo arc (Yoad's segment)</div>
+      <h4>ChatGPT → Claude → OpenEvidence / Glass → Medint</h4>
+      <p>Start familiar and flawed (ChatGPT). Show a sibling model for contrast (Claude) — different output on the same prompt. Step up to evidence-grounded tools with citations (OpenEvidence, Glass). Then show what responsible patient-facing AI looks like with humans in the loop (Medint, via Daphna). The progression tells one story: <em>AI is a spectrum, not a monolith — and the right tool for the job depends on who's in the loop.</em></p>
     </div>
 
     <h3 style="font-family:var(--serif);font-size:1.1rem;margin:2rem 0 1rem;">The 4 non-negotiables (from Ng 2026)</h3>
@@ -1444,7 +1557,10 @@
 <section style="max-width:960px;margin:2rem auto 0;padding:0 1.5rem;">
   <h3 style="font-family:var(--serif);font-size:1.1rem;margin-bottom:1rem;">References &amp; source material</h3>
   <div class="ref-list">
-    <div class="ref-item"><strong>Ng JY (2026).</strong> A structured framework for effective and responsible generative artificial intelligence chatbot prompt engineering throughout the scientific process: a comprehensive guide for the health and medical researcher. <em>Frontiers in Artificial Intelligence.</em> <a href="https://www.frontiersin.org/articles/10.3389/frai.2026.1745928/full" target="_blank">frontiersin.org</a><br>→ Source of the <strong>CLEAR framework</strong> (Yoad's opening segment) and the 4 non-negotiables in §⑤ Tools.</div>
+    <div class="ref-item"><strong>Ng JY (2026).</strong> A structured framework for effective and responsible generative artificial intelligence chatbot prompt engineering throughout the scientific process: a comprehensive guide for the health and medical researcher. <em>Frontiers in Artificial Intelligence.</em> <a href="https://www.frontiersin.org/articles/10.3389/frai.2026.1745928/full" target="_blank" rel="noopener">frontiersin.org</a><br>→ Source of the <strong>CLEAR framework</strong> (Yoad's opening segment) and the 4 non-negotiables in §⑤ Tools.</div>
+    <div class="ref-item"><strong>Idan D &amp; Einav S (2026).</strong> Primer on large language models: an educational overview for intensivists. → <strong>Daphna's own peer-reviewed framing</strong> of how clinicians should approach LLMs as tools. Core reference for her segment.</div>
+    <div class="ref-item"><strong>Comparative evaluation (Jan 2026).</strong> Diagnostic performance of Prof. Valmed, ChatGPT-5 Thinking, and OpenEvidence in rheumatology. → Evidence base for Or's "AI in rheumatology — current landscape" segment.</div>
+    <div class="ref-item"><strong>Human Factors Evaluation Guide (2026).</strong> Evaluation of Human-Factors-Related Risks in AI-Enabled Medical Devices — A Practical Guide. → Maps seven regulator-aligned risks (automation bias, trust miscalibration, deskilling, workflow disruption, and three more) to design/evaluation recommendations. Core of <strong>Itamar's Do's &amp; Don'ts block</strong>.</div>
     <div class="ref-item"><strong>Ayers JW et al. (2023).</strong> Comparing physician and artificial intelligence chatbot responses to patient questions posted to a public social media forum. <em>JAMA Internal Medicine.</em> → 79% preference stat + empathy finding in §① Overview.</div>
     <div class="ref-item"><strong>OpenAI (Jan 2026).</strong> AI as Healthcare Ally report. → 40M daily health-question users, "hospital desert" data.</div>
     <div class="ref-item"><strong>West Health-Gallup (Apr 2026).</strong> U.S. adults and AI for health advice. → 25%-in-last-30-days stat.</div>
@@ -1526,6 +1642,7 @@
     <p class="next-hint">Back to ① Overview → or ② Speakers →</p>
   </div>
 </section>
+</main>
 
 <div class="footer-note">
   AI at the Bedside · Yoad Dvir · Or Degany · Daphna Idan · Itamar Ben Shitrit<br>
@@ -1535,9 +1652,13 @@
 <script>
   function switchTab(sectionId, el) {
     document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-    document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+    document.querySelectorAll('.nav-links .nav-tab, .nav-links a').forEach(a => {
+      a.classList.remove('active');
+      if (a.hasAttribute('aria-selected')) a.setAttribute('aria-selected', 'false');
+    });
     document.getElementById(sectionId).classList.add('active');
     el.classList.add('active');
+    if (el.hasAttribute('aria-selected')) el.setAttribute('aria-selected', 'true');
     window.scrollTo(0, 0);
   }
   // Deep-link by hash
@@ -1545,8 +1666,8 @@
     const id = location.hash.slice(1);
     const el = document.getElementById(id);
     if (el) {
-      const link = document.querySelector('.nav-links a[onclick*="'+id+'"]');
-      if (link) switchTab(id, link);
+      const btn = document.querySelector('.nav-links .nav-tab[onclick*="'+id+'"], .nav-links a[onclick*="'+id+'"]');
+      if (btn) switchTab(id, btn);
     }
   }
 </script>
